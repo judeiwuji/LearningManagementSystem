@@ -14,6 +14,7 @@ import Quiz from '../Quiz';
 import QuizQuestion from '../QuizQuestion';
 import QuestionOption from '../QuestionOption';
 import QuestionAnswer from '../QuestionAnswer';
+import UserSession from '../UserSession';
 dotenv.config();
 
 const DB = new Sequelize({
@@ -44,6 +45,7 @@ const DB = new Sequelize({
     QuizQuestion,
     QuestionOption,
     QuestionAnswer,
+    UserSession,
   ],
 });
 

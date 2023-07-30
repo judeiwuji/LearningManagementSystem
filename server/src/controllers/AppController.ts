@@ -12,8 +12,7 @@ export default class AppController {
 
   static async install(req: Request, res: Response) {
     try {
-      const data = await validate(AppInstallSchema, req.body);
-      await appService.install(data);
+      await appService.install();
       res.status(201).send({ status: 'OK', message: 'Installed' });
     } catch (error: any) {
       const code = error.code || 400;

@@ -1,0 +1,50 @@
+import { Request, Response } from 'express';
+import validate from '../validators/validate';
+import { LoginSchema } from '../validators/schemas/AuthSchema';
+import AuthService from '../services/AuthService';
+import dayjs from 'dayjs';
+import * as dotenv from 'dotenv';
+import httpErrorHandler from '../utils/httpErrorHandler';
+dotenv.config();
+
+const AUTH_SESSION = process.env.AUTH_SESSION as string;
+const authService = new AuthService();
+export default class AuthController {
+  static async login(req: Request, res: Response) {
+    try {
+      const data = await validate(LoginSchema, req.body);
+      const session = await authService.login(data);
+      res.cookie(AUTH_SESSION, session, {
+        secure: process.env.NODE_ENV === 'production',
+        httpOnly: true,
+        expires: dayjs().add(1, 'days').toDate(),
+      });
+      res.send({ status: 'OK' });
+    } catch (error: any) {
+      httpErrorHandler(error, res);
+    }
+  }
+
+  static async currentUser(req: Request, res: Response) {
+    const session = req.cookies.session;
+
+    try {
+      const user = await authService.getUserFromSession(session);
+      res.send(user);
+    } catch (error: any) {
+      httpErrorHandler(error, res);
+    }
+  }
+
+  static async logout(req: Request, res: Response) {
+    const session = req.cookies.session;
+
+    try {
+      await authService.logout(session);
+      res.clearCookie(AUTH_SESSION);
+      res.status(204).send({ status: 'OK' });
+    } catch (error: any) {
+      httpErrorHandler(error, res);
+    }
+  }
+}

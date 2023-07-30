@@ -1,5 +1,6 @@
 import { Application } from 'express';
 import AppRoutes from './AppRoutes';
+import AuthRoutes from './AuthRoutes';
 
 export default class RouteManager {
   private baseAPI = '/api/v1';
@@ -8,6 +9,6 @@ export default class RouteManager {
   }
 
   routes() {
-    this.app.use(this.baseAPI, [AppRoutes]);
+    this.app.use(this.baseAPI, [AppRoutes, AuthRoutes]);
   }
 }
