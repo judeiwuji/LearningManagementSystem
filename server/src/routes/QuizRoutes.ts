@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import ensureAuth from '../middleware/ensureAuth';
-import StudentController from '../controllers/StudentController';
 import QuizController from '../controllers/QuizController';
 
 const QuizRoutes = Router();
