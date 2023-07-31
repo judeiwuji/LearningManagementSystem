@@ -1,3 +1,4 @@
+import LevelDTO from '../models/DTOs/LevelDTO';
 import Department from '../models/Department';
 import Level from '../models/Level';
 import User, { UserCreationAttributes } from '../models/User';
@@ -35,5 +36,9 @@ export default class AppService {
       { name: 'maths and statistics' },
       { name: 'science and laboratory technology' },
     ]);
+  }
+
+  async getLevels() {
+    return Level.findAll({ attributes: LevelDTO });
   }
 }

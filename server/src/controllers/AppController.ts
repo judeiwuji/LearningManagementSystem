@@ -1,7 +1,5 @@
 import { Request, Response } from 'express';
 import AppService from '../services/AppService';
-import validate from '../validators/validate';
-import { AppInstallSchema } from '../validators/schemas/AppSchema';
 
 const appService = new AppService();
 
@@ -18,5 +16,9 @@ export default class AppController {
       const code = error.code || 400;
       res.status(code).send({ error: error.message });
     }
+  }
+
+  static async getLevels(req: Request, res: Response) {
+    res.send(await appService.getLevels());
   }
 }
