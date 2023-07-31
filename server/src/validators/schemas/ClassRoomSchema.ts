@@ -7,3 +7,7 @@ export const ClassRoomCreationSchema = object({
 export const ClassRoomUpdateSchema = object({
   title: string().optional(),
 });
+
+export const ClassRoomStudentSchema = object({
+  studentId: number().positive().integer().required(),
+});

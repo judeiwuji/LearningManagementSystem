@@ -9,19 +9,20 @@ import {
 import { Optional } from 'sequelize';
 import Student from './Student';
 import ClassRoom from './ClassRoom';
-import Lecturer from './Lecturer';
 
 export interface ClassRoomStudentAttributes {
   id: number;
-  lecturerId: number;
-  lecturer: Lecturer;
+  classRoomId: number;
+  classRoom: ClassRoom;
   studentId: number;
   student: Student;
-  title: string;
 }
 
 export interface ClassRoomStudentCreationAttributes
-  extends Optional<ClassRoomStudentAttributes, 'id' | 'lecturer' | 'student'> {}
+  extends Optional<
+    ClassRoomStudentAttributes,
+    'id' | 'classRoom' | 'student'
+  > {}
 
 @Table
 export default class ClassRoomStudent extends Model<

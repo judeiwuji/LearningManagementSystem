@@ -11,6 +11,9 @@ import ClassRoom, {
 import LecturerService from './LecturerService';
 import Lecturer from '../models/Lecturer';
 import ClassRoomDTO from '../models/DTOs/ClassRoomDTO';
+import StudentService from './StudentService';
+import Student from '../models/Student';
+import StudentDTO from '../models/DTOs/StudentDTO';
 
 export default class ClassRoomService {
   private classRoomInclude() {

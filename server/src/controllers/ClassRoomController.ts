@@ -11,10 +11,14 @@ import IRequest from '../models/interfaces/IRequest';
 import User from '../models/User';
 import {
   ClassRoomCreationSchema,
+  ClassRoomStudentSchema,
   ClassRoomUpdateSchema,
 } from '../validators/schemas/ClassRoomSchema';
+import ClassRoomStudentService from '../services/ClassRoomStudentService';
 
 const classRoomService = new ClassRoomService();
+const classRoomStudentService = new ClassRoomStudentService();
+
 export default class ClassRoomController {
   static async createClassRoom(req: IRequest, res: Response) {
     try {
@@ -64,6 +68,46 @@ export default class ClassRoomController {
     const id = Number(req.params.id);
     try {
       await classRoomService.deleteClassRoom(id);
+      res.status(204).send({ status: 'OK' });
+    } catch (error: any) {
+      httpErrorHandler(error, res);
+    }
+  }
+
+  static async getStudents(req: IRequest, res: Response) {
+    const { id } = req.params;
+    const page = Number(req.query.page) || 1;
+    const search = req.query.search as string;
+    try {
+      const data = await classRoomStudentService.getStudents(
+        Number(id),
+        page,
+        search
+      );
+      res.send(data);
+    } catch (error) {
+      httpErrorHandler(error, res);
+    }
+  }
+
+  static async addStudent(req: Request, res: Response) {
+    const { id } = req.params;
+    try {
+      const data = await validate(ClassRoomStudentSchema, req.body);
+      const student = await classRoomStudentService.addStudent(
+        data,
+        Number(id)
+      );
+      res.status(201).send(student);
+    } catch (error: any) {
+      httpErrorHandler(error, res);
+    }
+  }
+
+  static async removeStudent(req: Request, res: Response) {
+    const id = Number(req.params.id);
+    try {
+      await classRoomStudentService.removeStudent(id);
       res.status(204).send({ status: 'OK' });
     } catch (error: any) {
       httpErrorHandler(error, res);
