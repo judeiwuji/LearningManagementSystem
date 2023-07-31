@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import AppController from '../controllers/AppController';
 import AuthController from '../controllers/AuthController';
 import ensureAuth from '../middleware/ensureAuth';
 

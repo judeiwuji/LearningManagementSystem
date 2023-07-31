@@ -13,7 +13,6 @@ export default async function deserializeUser(
     try {
       const authService = new AuthService();
       req.user = await authService.getUserFromSession(session);
-      console.log(req.user);
     } catch (error) {
       console.log('Failed to deserialize user');
     }
