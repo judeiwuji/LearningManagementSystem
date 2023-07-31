@@ -18,8 +18,8 @@ export interface LectureAttributes {
   lecturer: Lecturer;
   meetingId: string;
   meetingLink: string;
-  startDate: string;
-  duration: string;
+  startDate: Date;
+  endDate: Date;
   title: string;
 }
 
