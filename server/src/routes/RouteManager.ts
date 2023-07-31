@@ -7,6 +7,7 @@ import ClassRoomRoutes from './ClassRoomRoutes';
 import LectureRoutes from './LectureRoutes';
 import QuizRoutes from './QuizRoutes';
 import QuizQuestionRoutes from './QuizQuestionRoutes';
+import QuestionOptionRoutes from './QuestionOptionRoutes';
 
 export default class RouteManager {
   private baseAPI = '/api/v1';
@@ -24,6 +25,7 @@ export default class RouteManager {
       LectureRoutes,
       QuizRoutes,
       QuizQuestionRoutes,
+      QuestionOptionRoutes,
     ]);
   }
 }
