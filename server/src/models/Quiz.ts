@@ -20,7 +20,7 @@ export interface QuizAttributes {
 }
 
 export interface QuizCreationAttributes
-  extends Optional<QuizAttributes, 'id'> {}
+  extends Optional<QuizAttributes, 'id' | 'classRoom' | 'lecturer'> {}
 
 @Table
 export default class Quiz extends Model<
