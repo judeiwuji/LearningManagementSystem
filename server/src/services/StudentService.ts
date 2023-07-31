@@ -13,14 +13,17 @@ import BcryptUtil from '../utils/BcryptUtil';
 import Department from '../models/Department';
 import Level from '../models/Level';
 import StudentDTO from '../models/DTOs/StudentDTO';
-
-const studentInclude = [
-  { model: User, attributes: UserDTO },
-  { model: Department },
-  { model: Level },
-];
+import DepartmentDTO from '../models/DTOs/DepartmentDTO';
+import LevelDTO from '../models/DTOs/LevelDTO';
 
 export default class StudentService {
+  studentInclude(query: any = {}) {
+    return [
+      { model: User, attributes: UserDTO, where: query },
+      { model: Department, attributes: DepartmentDTO },
+      { model: Level, attributes: LevelDTO },
+    ];
+  }
   async createStudent(
     data: UserCreationAttributes & StudentCreationAtttributes
   ) {
@@ -57,7 +60,7 @@ export default class StudentService {
       await transaction.commit();
       return (await Student.findOne({
         where: { id: student.id },
-        include: studentInclude,
+        include: this.studentInclude(),
       })) as Student;
     } catch (error: any) {
       await transaction.rollback();
@@ -68,7 +71,7 @@ export default class StudentService {
   async findStudentBy(query: any) {
     const student = await Student.findOne({
       where: query,
-      include: studentInclude,
+      include: this.studentInclude(),
       attributes: StudentDTO,
     });
 
@@ -104,8 +107,7 @@ export default class StudentService {
     const { rows, count } = await Student.findAndCountAll({
       limit: pager.pageSize,
       offset: pager.startIndex,
-      where: query,
-      include: studentInclude,
+      include: this.studentInclude(query),
       attributes: StudentDTO,
     });
 
