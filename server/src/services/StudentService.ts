@@ -76,7 +76,7 @@ export default class StudentService {
     });
 
     if (!student) {
-      throw new NotFoundError();
+      throw new NotFoundError("Student not found");
     }
     return student;
   }

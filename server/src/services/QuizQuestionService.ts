@@ -18,7 +18,7 @@ import QuizQuestionDTO from '../models/DTOs/QuizQuestionDTO';
 import QuestionOptionDTO from '../models/DTOs/QuestionOptionDTO';
 
 export default class QuizQuestionService {
-  private questionInclude(query: any = {}) {
+  private questionInclude() {
     return [
       {
         model: QuestionOption,
@@ -64,11 +64,13 @@ export default class QuizQuestionService {
     }
   }
 
-  async findBy(query: any) {
+  async findBy(query: any, includeAnswer = false) {
     const question = await QuizQuestion.findOne({
       where: query,
       include: this.questionInclude(),
-      attributes: QuizQuestionDTO,
+      attributes: includeAnswer
+        ? [...QuizQuestionDTO, 'answer']
+        : QuizQuestionDTO,
     });
 
     if (!question) {
@@ -91,7 +93,7 @@ export default class QuizQuestionService {
     const { rows, count } = await QuizQuestion.findAndCountAll({
       limit: pager.pageSize,
       offset: pager.startIndex,
-      include: this.questionInclude(query),
+      include: this.questionInclude(),
       attributes: QuizQuestionDTO,
     });
 
