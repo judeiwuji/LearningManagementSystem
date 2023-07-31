@@ -1,28 +1,28 @@
 import { Op } from 'sequelize';
 import UserDTO from '../models/DTOs/UserDTO';
 import Pagination from '../models/Pagination';
-import Student, {
-  StudentAttributes,
-  StudentCreationAtttributes,
-} from '../models/Student';
 import User, { UserAttributes, UserCreationAttributes } from '../models/User';
 import DB from '../models/engine/DBStorage';
 import { Roles } from '../models/enums/Roles';
 import NotFoundError from '../models/errors/NotFoundError';
 import BcryptUtil from '../utils/BcryptUtil';
 import Department from '../models/Department';
-import Level from '../models/Level';
-import StudentDTO from '../models/DTOs/StudentDTO';
+import Lecturer, {
+  LecturerAttributes,
+  LecturerCreationAtttributes,
+} from '../models/Lecturer';
+import LecturerDTO from '../models/DTOs/LecturerDTO';
 
-const studentInclude = [
-  { model: User, attributes: UserDTO },
-  { model: Department },
-  { model: Level },
-];
+export default class LecturerService {
+  lecturerInclude(query: any = {}) {
+    return [
+      { model: User, attributes: UserDTO, where: query },
+      { model: Department },
+    ];
+  }
 
-export default class StudentService {
-  async createStudent(
-    data: UserCreationAttributes & StudentCreationAtttributes
+  async createLecturer(
+    data: UserCreationAttributes & LecturerCreationAtttributes
   ) {
     const transaction = await DB.transaction();
 
@@ -40,45 +40,44 @@ export default class StudentService {
           firstname: data.firstname,
           lastname: data.lastname,
           password: hashedPassword,
-          role: Roles.STUDENT,
+          role: Roles.LECTURER,
         },
         { transaction }
       );
 
-      const student = await Student.create(
+      const lecturer = await Lecturer.create(
         {
           departmentId: data.departmentId,
-          levelId: data.levelId,
           userId: user.id,
         },
         { transaction }
       );
 
       await transaction.commit();
-      return (await Student.findOne({
-        where: { id: student.id },
-        include: studentInclude,
-      })) as Student;
+      return (await Lecturer.findOne({
+        where: { id: lecturer.id },
+        include: this.lecturerInclude(),
+      })) as Lecturer;
     } catch (error: any) {
       await transaction.rollback();
       throw new Error(error.message);
     }
   }
 
-  async findStudentBy(query: any) {
-    const student = await Student.findOne({
+  async findLecturerBy(query: any) {
+    const lecturer = await Lecturer.findOne({
       where: query,
-      include: studentInclude,
-      attributes: StudentDTO,
+      include: this.lecturerInclude(),
+      attributes: LecturerDTO,
     });
 
-    if (!student) {
+    if (!lecturer) {
       throw new NotFoundError();
     }
-    return student;
+    return lecturer;
   }
 
-  async getStudents(page: number, search?: string) {
+  async getLecturers(page: number, search?: string) {
     const pager = new Pagination(page);
     const query: any = {};
     if (search) {
@@ -101,12 +100,11 @@ export default class StudentService {
       ];
     }
 
-    const { rows, count } = await Student.findAndCountAll({
+    const { rows, count } = await Lecturer.findAndCountAll({
       limit: pager.pageSize,
       offset: pager.startIndex,
-      where: query,
-      include: studentInclude,
-      attributes: StudentDTO,
+      include: this.lecturerInclude(query),
+      attributes: LecturerDTO,
     });
 
     return {
@@ -116,21 +114,20 @@ export default class StudentService {
     };
   }
 
-  async updateStudent(id: number, data: StudentAttributes & UserAttributes) {
-    const student = await this.findStudentBy({ id });
-    await student.update({
+  async updateLecturer(id: number, data: LecturerAttributes & UserAttributes) {
+    const lecturer = await this.findLecturerBy({ id });
+    await lecturer.update({
       departmentId: data.departmentId,
-      levelId: data.levelId,
     });
-    await student.user.update({
+    await lecturer.user.update({
       firstname: data.firstname,
       lastname: data.lastname,
     });
-    return student.reload();
+    return lecturer.reload();
   }
 
-  async deleteStudent(id: number) {
-    const student = await this.findStudentBy({ id });
-    student.destroy();
+  async deleteLecturer(id: number) {
+    const lecturer = await this.findLecturerBy({ id });
+    lecturer.destroy();
   }
 }

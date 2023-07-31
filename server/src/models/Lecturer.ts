@@ -13,7 +13,6 @@ import { Optional } from 'sequelize';
 export interface LecturerAttributes {
   id: number;
   userId: number;
-  levelId: number;
   departmentId: number;
 }
 
