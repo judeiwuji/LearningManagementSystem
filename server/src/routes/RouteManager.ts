@@ -10,6 +10,7 @@ import QuizQuestionRoutes from './QuizQuestionRoutes';
 import QuestionOptionRoutes from './QuestionOptionRoutes';
 import QuestionAnswerRoutes from './QuestionAsnwerRoutes';
 import DepartmentRoutes from './DepartmentRoutes';
+import UserRoutes from './UserRoutes';
 
 export default class RouteManager {
   private baseAPI = '/api/v1';
@@ -30,6 +31,7 @@ export default class RouteManager {
       QuestionOptionRoutes,
       QuestionAnswerRoutes,
       DepartmentRoutes,
+      UserRoutes,
     ]);
   }
 }

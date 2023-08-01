@@ -5,6 +5,11 @@ import AuthService from '../services/AuthService';
 import dayjs from 'dayjs';
 import * as dotenv from 'dotenv';
 import httpErrorHandler from '../utils/httpErrorHandler';
+import Lecturer from '../models/Lecturer';
+import LecturerDTO from '../models/DTOs/LecturerDTO';
+import StudentDTO from '../models/DTOs/StudentDTO';
+import Student from '../models/Student';
+import { Roles } from '../models/enums/Roles';
 dotenv.config();
 
 const AUTH_SESSION = process.env.AUTH_SESSION as string;
@@ -19,7 +24,9 @@ export default class AuthController {
         httpOnly: true,
         expires: dayjs().add(1, 'days').toDate(),
       });
-      res.send({ status: 'OK' });
+
+      const user = await authService.getUserFromSession(session);
+      res.send({ status: 'OK', role: Roles[user.role] });
     } catch (error: any) {
       httpErrorHandler(error, res);
     }
@@ -30,7 +37,13 @@ export default class AuthController {
 
     try {
       const user = await authService.getUserFromSession(session);
-      res.send(user);
+      const data = await user.reload({
+        include: [
+          { model: Lecturer, attributes: LecturerDTO },
+          { model: Student, attributes: StudentDTO },
+        ],
+      });
+      res.send(data);
     } catch (error: any) {
       httpErrorHandler(error, res);
     }
