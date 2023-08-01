@@ -1,0 +1,132 @@
+<nav class="navbar navbar-light bg-light fixed-top dashboard-navbar">
+  <div class="container-fluid">
+    <div>
+      <button class="btn btn-lg p-0 menu-btn me-1" (click)="toggleSidebar()">
+        <fa-icon [icon]="faBars"></fa-icon>
+      </button>
+      <a href="#" class="navbar-brand d-none d-md-inline-block">
+        <img src="./assets/imgs/logo.png" alt="Logo" class="logo" />
+      </a>
+      <span class="fw-bold d-inline-block ms-4">{{ title }}</span>
+    </div>
+
+    <div id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            href="javascript:void(0)"
+            [ngbPopover]="popContent"
+            placement="bottom-end"
+          >
+            <fa-icon [icon]="faUserAlt"></fa-icon>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<aside class="sidebar" [ngClass]="{ open: isSidebarOpen }">
+  <div>
+    <ng-container *ngIf="isSidebarOpen">
+      <div class="text-end mb-3">
+        <button class="btn btn-cirlce-close ms-auto" (click)="toggleSidebar()">
+          <fa-icon [icon]="faTimes"></fa-icon>
+        </button>
+      </div>
+    </ng-container>
+    <ul class="sidebar-nav">
+      <li>
+        <a
+          routerLink="/app/dashboard"
+          [ngClass]="{ active: activeUrl === '/app/dashboard' }"
+        >
+          <div class="d-flex align-items-center">
+            <fa-icon [icon]="faDashboard"></fa-icon>
+            <span class="ms-2">Dashboard</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="/app/shipments"
+          [ngClass]="{ active: activeUrl.includes('/app/shipments') }"
+        >
+          <div class="d-flex align-items-center">
+            <fa-icon [icon]="faUsers"></fa-icon>
+            <span class="ms-2">Students</span>
+          </div>
+        </a>
+      </li>
+
+      <li>
+        <a
+          routerLink="/app/quotations"
+          [ngClass]="{ active: activeUrl === '/app/quotations' }"
+        >
+          <div class="d-flex align-items-center">
+            <fa-icon [icon]="faChalkboardTeacher"></fa-icon>
+            <span class="ms-2">Lecturers</span>
+          </div>
+        </a>
+      </li>
+
+      <li>
+        <a
+          routerLink="/app/quotations"
+          [ngClass]="{ active: activeUrl === '/app/quotations' }"
+        >
+          <div class="d-flex align-items-center">
+            <fa-icon [icon]="faWifi"></fa-icon>
+            <span class="ms-2">Classrooms</span>
+          </div>
+        </a>
+      </li>
+
+      <li>
+        <a
+          routerLink="/app/quotations"
+          [ngClass]="{ active: activeUrl === '/app/quotations' }"
+        >
+          <div class="d-flex align-items-center">
+            <fa-icon [icon]="faListAlt"></fa-icon>
+            <span class="ms-2">Departments</span>
+          </div>
+        </a>
+      </li>
+
+      <li>
+        <a
+          routerLink="/app/settings"
+          [ngClass]="{ active: activeUrl === '/app/settings' }"
+        >
+          <div class="d-flex align-items-center">
+            <fa-icon [icon]="faCog"></fa-icon>
+            <span class="ms-2">Settings</span>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
+</aside>
+
+<div
+  class="overlay"
+  [ngClass]="{ open: isSidebarOpen }"
+  (click)="toggleSidebar()"
+></div>
+
+<ng-template #popContent>
+  <div class="d-flex align-items-center mb-2">
+    <img [src]="profile?.avatar" alt="Avatar" class="avatar me-2" />
+    <span>{{ profile?.firstname }}</span>
+  </div>
+
+  <button class="btn text-danger px-0" (click)="logout()">
+    <div class="d-flex align-items-center">
+      <fa-icon [icon]="faPowerOff" class="me-2"></fa-icon>
+      <span>Logout</span>
+    </div>
+  </button>
+</ng-template>

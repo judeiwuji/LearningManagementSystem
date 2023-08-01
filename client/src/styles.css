@@ -1,1 +1,132 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --app-primary: #4834d4;
+  --app-primary-dark: #3a26c0;
+  --app-primary-light: #4934d49f;
+  --app-white: #ffffff;
+  --app-grey: #fafafa;
+  --app-grey-dark: #c0c0c0;
+  --app-black: #000000;
+  --app-secondary: #ffae00;
+}
+html {
+  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+  font-size: 16px;
+}
+
+/* Btns */
+.btn-full-lg,
+.btn-full {
+  background-color: var(--app-primary);
+  color: var(--app-white);
+  border-radius: 20px;
+}
+
+.btn-full-lg {
+  min-width: 10em;
+  font-size: 1.15rem;
+}
+
+.btn-full-lg:hover,
+.btn-full:hover {
+  text-decoration: none;
+  background-color: var(--app-primary-dark);
+  color: var(--app-white);
+}
+
+.btn-full-lg:disabled,
+.btn-full:disabled {
+  text-decoration: none;
+  background-color: var(--app-primary-light);
+  color: var(--app-white);
+}
+/* Btns */
+
+/* App-Hero */
+.app-hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 30em;
+  padding: 4rem 0;
+}
+
+.app-hero-content {
+  max-width: 30rem;
+}
+
+.app-hero-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.app-hero-subtitle {
+  font-size: 1.1rem;
+  margin-bottom: 2.5rem;
+}
+
+.app-hero-shape {
+  position: absolute;
+  pointer-events: none;
+}
+
+.app-hero-shape--circle {
+  width: 80em;
+  height: 80em;
+  border-radius: 50%;
+  background-color: var(--app-primary);
+  top: 50%;
+  right: -80rem;
+  transform: translate(-50%, -50%);
+}
+/* App-Hero */
+
+/* Text */
+.title-text {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 0;
+}
+
+.subtitle-text {
+  font-size: 1rem;
+  font-weight: 400;
+  margin-bottom: 0;
+}
+/* Text */
+
+/* App-Card */
+.app-card {
+  border-radius: 15px;
+  border: 0;
+  box-shadow: 0 0 0.2rem var(--app-grey-dark);
+}
+/* App-Card */
+
+/* Label */
+label {
+  color: var(--app-grey-dark);
+  font-size: 0.85rem;
+}
+/* Label */
+
+/* Wrapper */
+.wrapper {
+  width: 100vw;
+  height: 100vh;
+}
+/* Wrapper */
+
+/* Link */
+.link:hover,
+.link {
+  display: inline-block;
+  text-decoration: none;
+}
+/* Link */
+
+/* BG Colors */
+.bg-app-black {
+  background-color: var(--app-black);
+}
+/* BG Colors */

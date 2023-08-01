@@ -1,0 +1,14 @@
+.features {
+  background-color: var(--app-grey);
+}
+
+.feature-card {
+  min-height: 13em;
+}
+
+.feature-card fa-icon {
+  font-size: 1.5rem;
+  color: var(--app-primary);
+  display: inline-block;
+  margin-bottom: 1rem;
+}
