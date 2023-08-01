@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   faSpinner = faSpinner;
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.email, Validators.required]),
@@ -24,6 +24,12 @@ export class LoginComponent {
     private readonly toastr: ToastrService,
     private readonly authService: AuthService
   ) {}
+
+  ngOnInit(): void {
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(['/dashboard']);
+    }
+  }
 
   get fc() {
     return this.loginForm.controls;

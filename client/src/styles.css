@@ -6,7 +6,7 @@
   --app-grey: #fafafa;
   --app-grey-dark: #c0c0c0;
   --app-black: #000000;
-  --app-secondary: #ffae00;
+  --app-secondary: #f73b3b;
 }
 html {
   scroll-behavior: smooth;
@@ -130,3 +130,31 @@ label {
   background-color: var(--app-black);
 }
 /* BG Colors */
+
+/* Queries */
+@media screen and (min-width: 767px) {
+  .app-hero-shape--circle {
+    right: -105rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .app-hero {
+    min-height: auto;
+    text-align: center;
+  }
+  .app-hero-shape--circle {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .app-hero-title {
+    font-size: 2rem;
+  }
+
+  .app-hero-subtitle {
+    font-size: 1rem;
+  }
+}
+/* Queries */

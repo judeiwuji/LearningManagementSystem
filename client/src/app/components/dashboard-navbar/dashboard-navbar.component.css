@@ -78,11 +78,13 @@
 }
 
 .sidebar-nav li a.active {
-  background-color: var(--app-black);
+  background-color: var(--app-secondary);
+  color: var(--app-white);
 }
 
 .sidebar-nav li a:hover {
-  background-color: var(--app-secondary);
+  background-color: var(--app-primary);
+  color: var(--app-white);
 }
 
 .menu-btn {
