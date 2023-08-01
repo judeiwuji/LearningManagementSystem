@@ -26,7 +26,13 @@ class App {
     this.app.use(express.json({}));
     this.app.use(express.urlencoded({ extended: false }));
     this.app.use(morgan('dev'));
-    this.app.use(cors({ origin: '*' }));
+    this.app.use(
+      cors({
+        origin: ['http://localhost:5000', 'http://localhost:4200'],
+        methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT'],
+        credentials: true,
+      })
+    );
     this.app.use(cookieParser(process.env.COOKIE_SECRET));
     this.app.use(deserializeUser);
     new RouteManager(this.app);

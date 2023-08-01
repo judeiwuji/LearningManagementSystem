@@ -10,6 +10,7 @@ import LecturerDTO from '../models/DTOs/LecturerDTO';
 import StudentDTO from '../models/DTOs/StudentDTO';
 import Student from '../models/Student';
 import { Roles } from '../models/enums/Roles';
+import UserDTO from '../models/DTOs/UserDTO';
 dotenv.config();
 
 const AUTH_SESSION = process.env.AUTH_SESSION as string;
@@ -20,13 +21,14 @@ export default class AuthController {
       const data = await validate(LoginSchema, req.body);
       const session = await authService.login(data);
       res.cookie(AUTH_SESSION, session, {
-        secure: process.env.NODE_ENV === 'production',
-        httpOnly: true,
+        secure: true,
+        httpOnly: process.env.NODE_ENV === 'production',
         expires: dayjs().add(1, 'days').toDate(),
+        sameSite: 'none',
       });
 
       const user = await authService.getUserFromSession(session);
-      res.send({ status: 'OK', role: Roles[user.role] });
+      res.send({ status: 'OK', role: Roles[user.role], session });
     } catch (error: any) {
       httpErrorHandler(error, res);
     }
@@ -42,6 +44,7 @@ export default class AuthController {
           { model: Lecturer, attributes: LecturerDTO },
           { model: Student, attributes: StudentDTO },
         ],
+        attributes: UserDTO,
       });
       res.send(data);
     } catch (error: any) {

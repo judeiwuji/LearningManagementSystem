@@ -1,2 +1,2 @@
-const UserDTO = ['id', 'firstname', 'lastname', 'email', 'avatar'];
+const UserDTO = ['id', 'firstname', 'lastname', 'email', 'avatar', 'role'];
 export default UserDTO;

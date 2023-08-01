@@ -1,5 +1,7 @@
 import { Optional } from 'sequelize';
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import { Column, DataType, HasOne, Model, Table } from 'sequelize-typescript';
+import Lecturer from './Lecturer';
+import Student from './Student';
 
 export interface UserAttributes {
   id: number;
@@ -31,9 +33,18 @@ export default class User extends Model<
   @Column({ type: DataType.CHAR(60), allowNull: false })
   password!: string;
 
-  @Column({ type: DataType.STRING(300), defaultValue: '/imgs/avatar.png' })
+  @Column({
+    type: DataType.STRING(300),
+    defaultValue: './assets/imgs/avatar.png',
+  })
   avatar!: string;
 
   @Column({ type: DataType.INTEGER, allowNull: false })
   role!: number;
+
+  @HasOne(() => Lecturer)
+  lecturer!: Lecturer;
+
+  @HasOne(() => Student)
+  student!: Student;
 }
