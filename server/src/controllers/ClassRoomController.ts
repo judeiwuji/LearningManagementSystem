@@ -90,6 +90,22 @@ export default class ClassRoomController {
     }
   }
 
+  static async getStudentClassRooms(req: IRequest, res: Response) {
+    const page = Number(req.query.page) || 1;
+    const search = req.query.search as string;
+    const user = req.user;
+    try {
+      const data = await classRoomStudentService.getStudentClassrooms(
+        user?.id,
+        page,
+        search
+      );
+      res.send(data);
+    } catch (error) {
+      httpErrorHandler(error, res);
+    }
+  }
+
   static async addStudent(req: Request, res: Response) {
     const { id } = req.params;
     try {

@@ -1,10 +1,17 @@
 import LevelDTO from '../models/DTOs/LevelDTO';
 import Department from '../models/Department';
 import Level from '../models/Level';
-import User, { UserCreationAttributes } from '../models/User';
+import User from '../models/User';
 import { Roles } from '../models/enums/Roles';
 import AppError from '../models/errors/AppError';
 import BcryptUtil from '../utils/BcryptUtil';
+import ClassRoomService from './ClassRoomService';
+import ClassRoomStudentService from './ClassRoomStudentService';
+import DepartmentService from './DepartmentService';
+import LectureService from './LectureService';
+import LecturerService from './LecturerService';
+import QuizService from './QuizService';
+import StudentService from './StudentService';
 
 export default class AppService {
   async install() {
@@ -40,5 +47,33 @@ export default class AppService {
 
   async getLevels() {
     return Level.findAll({ attributes: LevelDTO });
+  }
+
+  async getStats(user: User) {
+    const departmentService = new DepartmentService();
+    const classRoomService = new ClassRoomService();
+    const classRoomStudentService = new ClassRoomStudentService();
+    const lecturerService = new LecturerService();
+    const lectureService = new LectureService();
+    const quizService = new QuizService();
+    const studentService = new StudentService();
+    const stats: any = {
+      departments: await departmentService.getCount(),
+      lecturers: await lecturerService.getCount(),
+      students: await studentService.getCount(),
+    };
+
+    switch (user.role) {
+      case Roles.LECTURER:
+        stats.classRooms = await classRoomService.getCount(user.id);
+        stats.lectures = await lectureService.getCount(user.id);
+        stats.quizzes = await quizService.getCount(user.id);
+        break;
+      case Roles.STUDENT:
+        stats.classRooms = await classRoomStudentService.getCount(user.id);
+        break;
+    }
+
+    return stats;
   }
 }

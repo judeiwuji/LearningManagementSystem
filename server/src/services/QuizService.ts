@@ -85,4 +85,9 @@ export default class QuizService {
     const quiz = await this.findBy({ id, classRoomId });
     quiz.destroy();
   }
+
+  async getCount(userId: number) {
+    const lecturer = await this.lecturerService.findLecturerBy({ userId });
+    return Quiz.count({ where: { lecturerId: lecturer.id } });
+  }
 }

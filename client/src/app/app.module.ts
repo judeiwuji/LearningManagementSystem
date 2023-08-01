@@ -17,6 +17,18 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DashboardNavbarComponent } from './components/dashboard-navbar/dashboard-navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CookieService } from 'ngx-cookie-service';
+import { ClassroomsComponent } from './pages/classrooms/classrooms.component';
+import { StudentsComponent } from './pages/students/students.component';
+import { LecturersComponent } from './pages/lecturers/lecturers.component';
+import { DepartmentsComponent } from './pages/departments/departments.component';
+import { SettingsComponent } from './pages/settings/settings.component';
+import { SearchFormComponent } from './components/search-form/search-form.component';
+import { AddBtnComponent } from './components/add-btn/add-btn.component';
+import { LoadMoreBtnComponent } from './components/load-more-btn/load-more-btn.component';
+import { FootNoteComponent } from './components/foot-note/foot-note.component';
+import { MoreOptionBtnComponent } from './components/more-option-btn/more-option-btn.component';
+import { DepartmentFormComponent } from './modals/department-form/department-form.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +40,18 @@ import { CookieService } from 'ngx-cookie-service';
     MainFooterComponent,
     ForgottenPasswordComponent,
     DashboardNavbarComponent,
+    ClassroomsComponent,
+    StudentsComponent,
+    LecturersComponent,
+    DepartmentsComponent,
+    SettingsComponent,
+    SearchFormComponent,
+    AddBtnComponent,
+    LoadMoreBtnComponent,
+    FootNoteComponent,
+    MoreOptionBtnComponent,
+    DepartmentFormComponent,
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,

@@ -94,4 +94,9 @@ export default class ClassRoomService {
     const classRoom = await this.findBy({ id });
     classRoom.destroy();
   }
+
+  async getCount(userId: number) {
+    const lecturer = await this.lecturerService.findLecturerBy({ userId });
+    return ClassRoom.count({ where: { lecturerId: lecturer.id } });
+  }
 }

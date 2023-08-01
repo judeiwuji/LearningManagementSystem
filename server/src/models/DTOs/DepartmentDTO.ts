@@ -1,2 +1,2 @@
-const DepartmentDTO = ['id', 'name'];
+const DepartmentDTO = ['id', 'name', 'updatedAt'];
 export default DepartmentDTO;

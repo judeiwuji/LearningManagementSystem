@@ -102,4 +102,9 @@ export default class LectureService {
     const lecture = await this.findBy({ id, lecturerId: lecturer.id });
     lecture.destroy();
   }
+
+  async getCount(userId: number) {
+    const lecturer = await this.lecturerService.findLecturerBy({ userId });
+    return Lecture.count({ where: { lecturerId: lecturer.id } });
+  }
 }

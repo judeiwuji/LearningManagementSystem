@@ -1,0 +1,24 @@
+<div ngbDropdown placement="bottom-end">
+  <button class="btn btn-sm btn-full" type="button" ngbDropdownToggle>
+    More <app-loading [loading]="loading"></app-loading>
+  </button>
+
+  <ul class="dropdown-menu" ngbDropdownMenu>
+    <li>
+      <button ngbDropdownItem (click)="selectEdit()">
+        <div class="d-flex align-items-center">
+          <fa-icon [icon]="faPen" class="me-2"></fa-icon>
+          <span>Edit</span>
+        </div>
+      </button>
+    </li>
+    <li>
+      <button ngbDropdownItem (click)="selectDelete()">
+        <div class="d-flex align-items-center">
+          <fa-icon [icon]="faTrashAlt" class="me-2"></fa-icon>
+          <span>Delete</span>
+        </div>
+      </button>
+    </li>
+  </ul>
+</div>

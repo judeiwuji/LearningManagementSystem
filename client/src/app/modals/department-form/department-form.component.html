@@ -1,0 +1,28 @@
+<div class="modal-header">
+  <h5 class="modal-title-text text-muted">
+    <span *ngIf="data">Edit</span> <span *ngIf="!data">New</span> Department
+  </h5>
+  <button class="btn-close" (click)="close()"></button>
+</div>
+
+<div class="modal-body">
+  <form [formGroup]="dataForm" (ngSubmit)="save()">
+    <div class="mb-4">
+      <label for="name">Department name</label>
+      <input
+        id="name"
+        type="text"
+        class="form-control"
+        formControlName="name"
+        placeholder="Department name"
+        [ngClass]="{ 'border-danger': fc['name'].touched && fc['name'].errors }"
+      />
+    </div>
+    <div class="d-grid">
+      <button class="btn btn-full">
+        <span *ngIf="data">Save</span> <span *ngIf="!data">Create</span>
+        <app-loading [loading]="processing"></app-loading>
+      </button>
+    </div>
+  </form>
+</div>

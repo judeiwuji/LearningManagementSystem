@@ -76,7 +76,7 @@ export default class StudentService {
     });
 
     if (!student) {
-      throw new NotFoundError("Student not found");
+      throw new NotFoundError('Student not found');
     }
     return student;
   }
@@ -116,6 +116,10 @@ export default class StudentService {
       results: rows,
       totalPages: pager.totalPages(count),
     };
+  }
+
+  async getCount() {
+    return Student.count();
   }
 
   async updateStudent(id: number, data: StudentAttributes & UserAttributes) {

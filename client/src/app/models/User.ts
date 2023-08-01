@@ -5,3 +5,10 @@ export interface User {
   email: string;
   avatar: string;
 }
+
+export interface UserActionRequest {
+  firstname: string;
+  lastname: string;
+  email: string;
+  password: string;
+}

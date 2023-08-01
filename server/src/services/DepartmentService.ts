@@ -46,6 +46,7 @@ export default class DepartmentService {
       limit: pager.pageSize,
       offset: pager.startIndex,
       attributes: DepartmentDTO,
+      where: query,
     });
 
     return {
@@ -66,5 +67,9 @@ export default class DepartmentService {
   async deleteDepartment(id: number) {
     const department = await this.findBy({ id });
     department.destroy();
+  }
+
+  async getCount() {
+    return Department.count({});
   }
 }

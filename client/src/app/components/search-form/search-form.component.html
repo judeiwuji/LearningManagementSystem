@@ -1,0 +1,10 @@
+<form [formGroup]="searchForm" class="form-inline" (ngSubmit)="search()">
+  <div class="d-flex form-control app-form-control align-items-center">
+    <input type="search" placeholder="Search" formControlName="term" />
+    <span>
+      <button class="btn btn-sm">
+        <fa-icon [icon]="faSearch"></fa-icon>
+      </button>
+    </span>
+  </div>
+</form>

@@ -101,6 +101,12 @@ html {
   border: 0;
   box-shadow: 0 0 0.2rem var(--app-grey-dark);
 }
+
+.app-card .card-header,
+.app-card .card-footer {
+  background-color: var(--app-white);
+  border: 0;
+}
 /* App-Card */
 
 /* Label */
@@ -131,6 +137,33 @@ label {
 }
 /* BG Colors */
 
+/* dashboard-main */
+.dashboard-main {
+  padding-top: 60px;
+  width: 80%;
+  margin-left: auto;
+}
+/* dashboard-main */
+
+/* App form */
+.app-form-control {
+  padding: 0.15rem 0.5rem;
+}
+
+.app-form-control input {
+  border: 0;
+  outline: 0;
+  width: 100%;
+}
+/* App form */
+
+/* modal-title-text */
+.modal-title-text {
+  font-size: 1rem;
+  font-weight: 600;
+}
+/* modal-title-text */
+
 /* Queries */
 @media screen and (min-width: 767px) {
   .app-hero-shape--circle {
@@ -143,8 +176,13 @@ label {
     min-height: auto;
     text-align: center;
   }
+
   .app-hero-shape--circle {
     display: none;
+  }
+
+  .dashboard-main {
+    width: 100%;
   }
 }
 

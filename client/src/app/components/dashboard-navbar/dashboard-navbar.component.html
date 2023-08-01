@@ -4,7 +4,7 @@
       <button class="btn btn-lg p-0 menu-btn me-1" (click)="toggleSidebar()">
         <fa-icon [icon]="faBars"></fa-icon>
       </button>
-      <a href="#" class="navbar-brand d-none d-md-inline-block">
+      <a href="/dashboard" class="navbar-brand d-none d-md-inline-block">
         <img src="./assets/imgs/logo.png" alt="Logo" class="logo" />
       </a>
       <span class="fw-bold d-inline-block ms-4">{{ title }}</span>
@@ -50,8 +50,8 @@
       </li>
       <li>
         <a
-          routerLink="/app/shipments"
-          [ngClass]="{ active: activeUrl.includes('/app/shipments') }"
+          routerLink="/students"
+          [ngClass]="{ active: activeUrl.includes('/students') }"
         >
           <div class="d-flex align-items-center">
             <fa-icon [icon]="faUsers"></fa-icon>
@@ -62,8 +62,8 @@
 
       <li>
         <a
-          routerLink="/app/quotations"
-          [ngClass]="{ active: activeUrl === '/app/quotations' }"
+          routerLink="/lecturers"
+          [ngClass]="{ active: activeUrl === '/lecturers' }"
         >
           <div class="d-flex align-items-center">
             <fa-icon [icon]="faChalkboardTeacher"></fa-icon>
@@ -74,8 +74,8 @@
 
       <li>
         <a
-          routerLink="/app/quotations"
-          [ngClass]="{ active: activeUrl === '/app/quotations' }"
+          routerLink="/classrooms"
+          [ngClass]="{ active: activeUrl === '/classrooms' }"
         >
           <div class="d-flex align-items-center">
             <fa-icon [icon]="faWifi"></fa-icon>
@@ -86,8 +86,8 @@
 
       <li>
         <a
-          routerLink="/app/quotations"
-          [ngClass]="{ active: activeUrl === '/app/quotations' }"
+          routerLink="/departments"
+          [ngClass]="{ active: activeUrl === '/departments' }"
         >
           <div class="d-flex align-items-center">
             <fa-icon [icon]="faListAlt"></fa-icon>
@@ -98,8 +98,8 @@
 
       <li>
         <a
-          routerLink="/app/settings"
-          [ngClass]="{ active: activeUrl === '/app/settings' }"
+          routerLink="/settings"
+          [ngClass]="{ active: activeUrl === '/settings' }"
         >
           <div class="d-flex align-items-center">
             <fa-icon [icon]="faCog"></fa-icon>

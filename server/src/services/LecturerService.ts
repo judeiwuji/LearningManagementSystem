@@ -130,4 +130,8 @@ export default class LecturerService {
     const lecturer = await this.findLecturerBy({ id });
     lecturer.destroy();
   }
+
+  async getCount() {
+    return Lecturer.count({});
+  }
 }
