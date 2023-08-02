@@ -8,7 +8,7 @@ import {
   FaIconLibrary,
   FontAwesomeModule,
 } from '@fortawesome/angular-fontawesome';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -40,9 +40,12 @@ import { StatsCardComponent } from './components/stats-card/stats-card.component
 import {
   faChalkboardTeacher,
   faListAlt,
+  faNewspaper,
+  faTasks,
   faUsers,
   faWifi,
 } from '@fortawesome/free-solid-svg-icons';
+import { AuthInterceptor } from './auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -82,7 +85,14 @@ import {
     HttpClientModule,
     ToastrModule.forRoot({ timeOut: 2000, progressBar: true }),
   ],
-  providers: [CookieService],
+  providers: [
+    CookieService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {
@@ -93,5 +103,7 @@ export class AppModule {
     library.addIcons(faWifi);
     library.addIcons(faChalkboardTeacher);
     library.addIcons(faChalkboardTeacher);
+    library.addIcons(faNewspaper);
+    library.addIcons(faTasks);
   }
 }

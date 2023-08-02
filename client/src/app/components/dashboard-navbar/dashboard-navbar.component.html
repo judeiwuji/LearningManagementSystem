@@ -12,21 +12,23 @@
 
     <div id="navbarNav">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            href="javascript:void(0)"
-            [ngbPopover]="popContent"
-            placement="bottom-end"
-          >
-            <div class="d-flex align-items-center">
-              <span class="me-2 small fw-bold">
-                howdy {{ profile?.firstname }}
-              </span>
-              <img [src]="profile?.avatar" alt="Avatar" class="avatar" />
-            </div>
-          </a>
-        </li>
+        <ng-container *ngIf="profile">
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="javascript:void(0)"
+              [ngbPopover]="popContent"
+              placement="bottom-end"
+            >
+              <div class="d-flex align-items-center">
+                <span class="me-2 small fw-bold">
+                  howdy {{ profile.firstname }}
+                </span>
+                <img [src]="profile.avatar" alt="Avatar" class="avatar" />
+              </div>
+            </a>
+          </li>
+        </ng-container>
       </ul>
     </div>
   </div>
@@ -53,53 +55,58 @@
           </div>
         </a>
       </li>
-      <li>
-        <a
-          routerLink="/students"
-          [ngClass]="{ active: activeUrl.includes('/students') }"
-        >
-          <div class="d-flex align-items-center">
-            <fa-icon [icon]="faUsers"></fa-icon>
-            <span class="ms-2">Students</span>
-          </div>
-        </a>
-      </li>
 
-      <li>
-        <a
-          routerLink="/lecturers"
-          [ngClass]="{ active: activeUrl === '/lecturers' }"
-        >
-          <div class="d-flex align-items-center">
-            <fa-icon [icon]="faChalkboardTeacher"></fa-icon>
-            <span class="ms-2">Lecturers</span>
-          </div>
-        </a>
-      </li>
+      <ng-container *ngIf="profile && profile.role === Roles.ADMIN">
+        <li>
+          <a
+            routerLink="/students"
+            [ngClass]="{ active: activeUrl.includes('/students') }"
+          >
+            <div class="d-flex align-items-center">
+              <fa-icon [icon]="faUsers"></fa-icon>
+              <span class="ms-2">Students</span>
+            </div>
+          </a>
+        </li>
 
-      <li>
-        <a
-          routerLink="/classrooms"
-          [ngClass]="{ active: activeUrl === '/classrooms' }"
-        >
-          <div class="d-flex align-items-center">
-            <fa-icon [icon]="faWifi"></fa-icon>
-            <span class="ms-2">Classrooms</span>
-          </div>
-        </a>
-      </li>
+        <li>
+          <a
+            routerLink="/lecturers"
+            [ngClass]="{ active: activeUrl === '/lecturers' }"
+          >
+            <div class="d-flex align-items-center">
+              <fa-icon [icon]="faChalkboardTeacher"></fa-icon>
+              <span class="ms-2">Lecturers</span>
+            </div>
+          </a>
+        </li>
 
-      <li>
-        <a
-          routerLink="/departments"
-          [ngClass]="{ active: activeUrl === '/departments' }"
-        >
-          <div class="d-flex align-items-center">
-            <fa-icon [icon]="faListAlt"></fa-icon>
-            <span class="ms-2">Departments</span>
-          </div>
-        </a>
-      </li>
+        <li>
+          <a
+            routerLink="/departments"
+            [ngClass]="{ active: activeUrl === '/departments' }"
+          >
+            <div class="d-flex align-items-center">
+              <fa-icon [icon]="faListAlt"></fa-icon>
+              <span class="ms-2">Departments</span>
+            </div>
+          </a>
+        </li>
+      </ng-container>
+
+      <ng-container *ngIf="profile && profile.role === Roles.LECTURER">
+        <li>
+          <a
+            routerLink="/classrooms"
+            [ngClass]="{ active: activeUrl === '/classrooms' }"
+          >
+            <div class="d-flex align-items-center">
+              <fa-icon [icon]="faWifi"></fa-icon>
+              <span class="ms-2">Classrooms</span>
+            </div>
+          </a>
+        </li>
+      </ng-container>
 
       <li>
         <a

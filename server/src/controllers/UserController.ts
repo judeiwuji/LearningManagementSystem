@@ -5,6 +5,7 @@ import validate from '../validators/validate';
 import {
   ChangePasswordSchema,
   ResetPasswordSchema,
+  UserUpdateSchema,
 } from '../validators/schemas/UserSchema';
 import IRequest from '../models/interfaces/IRequest';
 
@@ -35,6 +36,17 @@ export default class UserController {
       const data = await validate(ResetPasswordSchema, req.body);
       await userService.changePassword(data, data.userId);
       res.send({ status: 'OK' });
+    } catch (error) {
+      httpErrorHandler(error, res);
+    }
+  }
+
+  static async updateUser(req: IRequest, res: Response) {
+    try {
+      const id = Number(req.params.id);
+      const data = await validate(UserUpdateSchema, req.body);
+      const update = await userService.updateUser(data, id);
+      res.send(update);
     } catch (error) {
       httpErrorHandler(error, res);
     }

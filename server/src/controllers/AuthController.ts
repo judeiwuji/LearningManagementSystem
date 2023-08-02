@@ -11,6 +11,10 @@ import StudentDTO from '../models/DTOs/StudentDTO';
 import Student from '../models/Student';
 import { Roles } from '../models/enums/Roles';
 import UserDTO from '../models/DTOs/UserDTO';
+import Department from '../models/Department';
+import DepartmentDTO from '../models/DTOs/DepartmentDTO';
+import Level from '../models/Level';
+import LevelDTO from '../models/DTOs/LevelDTO';
 dotenv.config();
 
 const AUTH_SESSION = process.env.AUTH_SESSION as string;
@@ -41,8 +45,19 @@ export default class AuthController {
       const user = await authService.getUserFromSession(session);
       const data = await user.reload({
         include: [
-          { model: Lecturer, attributes: LecturerDTO },
-          { model: Student, attributes: StudentDTO },
+          {
+            model: Lecturer,
+            attributes: LecturerDTO,
+            include: [{ model: Department, attributes: DepartmentDTO }],
+          },
+          {
+            model: Student,
+            attributes: StudentDTO,
+            include: [
+              { model: Department, attributes: DepartmentDTO },
+              { model: Level, attributes: LevelDTO },
+            ],
+          },
         ],
         attributes: UserDTO,
       });

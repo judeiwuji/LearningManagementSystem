@@ -17,6 +17,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/models/User';
+import { Roles } from 'src/app/models/enums/Roles';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -45,12 +46,12 @@ export class DashboardNavbarComponent {
   isSidebarOpen = false;
   activeUrl: string;
   profile?: User;
+  Roles = Roles;
 
   constructor(
     private readonly router: Router,
     private readonly authService: AuthService,
-    private readonly toastr: ToastrService,
-    private readonly userService: UserService
+    private readonly toastr: ToastrService
   ) {
     this.activeUrl = this.router.url;
   }

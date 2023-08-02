@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ChangePasswordRequest } from '../models/ChangePassword';
 import { ResetPasswordRequest } from '../models/ResetPassword';
-import { User } from '../models/User';
+import { User, UserActionRequest } from '../models/User';
 import { Feedback } from '../models/Feedback';
 
 @Injectable({
@@ -20,7 +20,8 @@ export class UserService {
   changePassword(request: ChangePasswordRequest) {
     return this.http.post<Feedback>(
       `${this.API_URL}/users/changePassword`,
-      request
+      request,
+      { withCredentials: true }
     );
   }
 
@@ -29,5 +30,11 @@ export class UserService {
       `${this.API_URL}/users/resetPassword`,
       request
     );
+  }
+
+  updateUser(request: UserActionRequest, id: number) {
+    return this.http.put<User>(`${this.API_URL}/users/${id}`, request, {
+      withCredentials: true,
+    });
   }
 }

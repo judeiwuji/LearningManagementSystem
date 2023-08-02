@@ -5,10 +5,11 @@ import UserController from '../controllers/UserController';
 const UserRoutes = Router();
 
 UserRoutes.get('/users/identify', UserController.identifyUser);
-UserRoutes.get(
+UserRoutes.post(
   '/users/changePassword',
   ensureAuth,
   UserController.changePassword
 );
-UserRoutes.get('/users/resetPassword', UserController.resetPassword);
+UserRoutes.post('/users/resetPassword', UserController.resetPassword);
+UserRoutes.put('/users/:id', UserController.updateUser);
 export default UserRoutes;

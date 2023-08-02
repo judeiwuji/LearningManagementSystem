@@ -10,3 +10,10 @@ export const ResetPasswordSchema = object({
   confirmPassword: string().oneOf([ref('password')], 'Password mismatch'),
   userId: number().integer().positive().required(),
 });
+
+export const UserUpdateSchema = object({
+  firstname: string().optional(),
+  lastname: string().optional(),
+  departmentId: number().integer().positive().optional(),
+  levelId: number().integer().positive().optional(),
+});

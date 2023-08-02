@@ -1,5 +1,83 @@
-<app-dashboard-navbar [title]="'Students'"></app-dashboard-navbar>
+<app-dashboard-navbar [title]="'Settings'"></app-dashboard-navbar>
 <div class="dashboard-main">
-  <div class="container py-3"></div>
+  <div class="container py-3">
+    <h5 class="fw-bold text-muted mb-3">Acccount</h5>
+    <ng-container *ngIf="accountForm">
+      <div class="card app-card">
+        <div class="card-body">
+          <form [formGroup]="accountForm" (ngSubmit)="save()">
+            <div class="row mb-3">
+              <div class="col-12 col-sm-10 col-md-6 mx-sm-auto mx-md-0 mb-3">
+                <label for="firstname">Firstname</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Firstname"
+                  id="firstname"
+                  formControlName="firstname"
+                />
+              </div>
+              <div class="col-12 col-sm-10 col-md-6 mx-sm-auto mx-md-0">
+                <label for="firstname">Lastname</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Lastname"
+                  id="lastname"
+                  formControlName="lastname"
+                />
+              </div>
+            </div>
+
+            <div class="mb-3" *ngIf="fc['departmentId'] || fc['levelId']">
+              <div class="row">
+                <ng-container *ngIf="fc['departmentId']">
+                  <div
+                    class="col-12"
+                    [ngClass]="{
+                      'col-sm-10 col-md-6 mx-sm-auto mx-md-0': fc['levelId'],
+                      'col-sm-10 col-md-12 mx-sm-auto mx-md-0': !fc['levelId']
+                    }"
+                  >
+                    <label for="email">Department</label>
+                    <app-department-dropdown-list
+                      [selectedId]="fc['departmentId'].value"
+                      (onSelect)="onSelectDepartment($event)"
+                    ></app-department-dropdown-list>
+                  </div>
+                </ng-container>
+
+                <ng-container *ngIf="fc['levelId']">
+                  <div
+                    class="col-12"
+                    [ngClass]="{
+                      'col-sm-10 col-md-6 mx-sm-auto mx-md-0':
+                        fc['departmentId'],
+                      'col-sm-10 col-md-12 mx-sm-auto mx-md-0':
+                        !fc['departmentId']
+                    }"
+                  >
+                    <label for="fpassword">Level</label>
+                    <app-level-dropdown-list
+                      [selectedId]="fc['levelId'].value"
+                      (onSelect)="onSelectLevel($event)"
+                    ></app-level-dropdown-list>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+
+            <div class="text-center">
+              <button class="btn btn-full-lg">
+                Save
+                <app-loading [loading]="processing"></app-loading>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+  <app-main-footer></app-main-footer>
 </div>
-<app-main-footer></app-main-footer>
