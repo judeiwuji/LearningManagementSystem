@@ -7,6 +7,7 @@ export interface Lecturer {
   user: User;
   departmentId: number;
   department: Department;
+  processing?: boolean;
 }
 
 export interface LecturerActionRequest extends UserActionRequest {

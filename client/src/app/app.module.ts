@@ -32,6 +32,7 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { StudentFormComponent } from './modals/student-form/student-form.component';
 import { DepartmentDropdownListComponent } from './components/department-dropdown-list/department-dropdown-list.component';
 import { LevelDropdownListComponent } from './components/level-dropdown-list/level-dropdown-list.component';
+import { LecturerFormComponent } from './modals/lecturer-form/lecturer-form.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { LevelDropdownListComponent } from './components/level-dropdown-list/lev
     StudentFormComponent,
     DepartmentDropdownListComponent,
     LevelDropdownListComponent,
+    LecturerFormComponent,
   ],
   imports: [
     BrowserModule,

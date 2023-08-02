@@ -1,5 +1,79 @@
 <app-dashboard-navbar [title]="'Lecturers'"></app-dashboard-navbar>
 <div class="dashboard-main">
-  <div class="container py-3"></div>
+  <div class="container py-3">
+    <!-- Content -->
+    <div class="card app-card content-card">
+      <div class="card-body">
+        <div class="card-header">
+          <div
+            class="d-flex justify-content-between flex-wrap align-items-center"
+          >
+            <div class="mb-3 mb-sm-0">
+              <app-search-form (onSearch)="onSearch($event)"></app-search-form>
+            </div>
+
+            <div>
+              <app-add-btn [title]="'Lecturer'" (onAdd)="onAdd()"></app-add-btn>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <div class="app-table-container">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Firstname</th>
+                  <th>Lastname</th>
+                  <th>Email</th>
+                  <th>Department</th>
+                  <th class="text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let item of pager.results; index as i">
+                  <tr>
+                    <td>{{ i + 1 }}.</td>
+                    <td class="text-capitalize">{{ item.user.firstname }}</td>
+                    <td class="text-capitalize">{{ item.user.lastname }}</td>
+                    <td>{{ item.user.email }}</td>
+                    <td class="text-capitalize">{{ item.department.name }}</td>
+                    <td class="text-center">
+                      <app-more-option-btn
+                        (onEdit)="onEdit(item)"
+                        (onDelete)="onDelete(item)"
+                        [loading]="item.processing"
+                      ></app-more-option-btn>
+                    </td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Load more Btn -->
+          <ng-container *ngIf="pager.page < pager.totalPages">
+            <div class="text-center">
+              <app-load-more-btn
+                [loading]="loading"
+                (onLoad)="loadData(pager.page + 1)"
+              ></app-load-more-btn>
+            </div>
+          </ng-container>
+          <!-- Load more Btn -->
+        </div>
+
+        <div class="card-footer text-center">
+          <app-foot-note
+            [currentPage]="pager.page"
+            [totalPages]="pager.totalPages"
+          ></app-foot-note>
+        </div>
+      </div>
+    </div>
+    <!-- Content -->
+  </div>
+
+  <app-main-footer></app-main-footer>
 </div>
-<app-main-footer></app-main-footer>
