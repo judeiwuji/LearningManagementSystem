@@ -1,2 +1,9 @@
-const LectureDTO = ['id', 'meetingId', 'meetingLink'];
+const LectureDTO = [
+  'id',
+  'title',
+  'meetingId',
+  'meetingLink',
+  'startDate',
+  'endDate',
+];
 export default LectureDTO;

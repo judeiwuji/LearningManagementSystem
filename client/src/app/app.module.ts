@@ -47,6 +47,9 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { AuthInterceptor } from './auth.interceptor';
 import { ClassroomFormComponent } from './modals/classroom-form/classroom-form.component';
+import { ClassroomDetailComponent } from './pages/classroom-detail/classroom-detail.component';
+import { ClassroomStudentFormComponent } from './modals/classroom-student-form/classroom-student-form.component';
+import { ActionBtnComponent } from './components/action-btn/action-btn.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +79,9 @@ import { ClassroomFormComponent } from './modals/classroom-form/classroom-form.c
     LecturerFormComponent,
     StatsCardComponent,
     ClassroomFormComponent,
+    ClassroomDetailComponent,
+    ClassroomStudentFormComponent,
+    ActionBtnComponent,
   ],
   imports: [
     BrowserModule,

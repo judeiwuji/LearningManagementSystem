@@ -1,0 +1,37 @@
+<div class="modal-header">
+  <h5 class="modal-title-text text-muted">Students</h5>
+  <button class="btn-close" (click)="close()"></button>
+</div>
+
+<div class="modal-body">
+  <div class="mb-3">
+    <app-search-form (onSearch)="onSearch($event)"></app-search-form>
+  </div>
+
+  <ul class="app-dropdown-menu">
+    <ng-container *ngFor="let student of pager.results">
+      <div class="d-flex justify-content-between mb-3">
+        <div class="d-flex">
+          <img [src]="student.user.avatar" alt="" class="avatar me-2" />
+          <div>
+            <p class="mb-0 text-capitalize">
+              {{ student.user.firstname }}&nbsp;{{ student.user.lastname }}
+            </p>
+            <small class="text-muted text-capitalize">
+              {{ student.department.name }}
+            </small>
+          </div>
+        </div>
+
+        <ng-container *ngIf="!student.added">
+          <div class="align-self-center">
+            <app-add-btn
+              (onAdd)="addStudent(student)"
+              [loading]="student.processing"
+            ></app-add-btn>
+          </div>
+        </ng-container>
+      </div>
+    </ng-container>
+  </ul>
+</div>

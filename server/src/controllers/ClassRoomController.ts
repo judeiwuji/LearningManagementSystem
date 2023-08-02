@@ -121,9 +121,10 @@ export default class ClassRoomController {
   }
 
   static async removeStudent(req: Request, res: Response) {
+    const classRoomId = Number(req.params.cid);
     const id = Number(req.params.id);
     try {
-      await classRoomStudentService.removeStudent(id);
+      await classRoomStudentService.removeStudent(classRoomId, id);
       res.status(204).send({ status: 'OK' });
     } catch (error: any) {
       httpErrorHandler(error, res);

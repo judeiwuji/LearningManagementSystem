@@ -86,9 +86,18 @@ export default class LectureService {
     };
   }
 
-  async updateLecture(id: number, data: LectureAttributes, userId: number) {
+  async updateLecture(
+    id: number,
+    classRoomId: number,
+    data: LectureAttributes,
+    userId: number
+  ) {
     const lecturer = await this.lecturerService.findLecturerBy({ userId });
-    const lecture = await this.findBy({ id, lecturerId: lecturer.id });
+    const lecture = await this.findBy({
+      id,
+      lecturerId: lecturer.id,
+      classRoomId,
+    });
     await lecture.update({
       startDate: data.startDate ? new Date(data.startDate) : undefined,
       endDate: data.endDate ? new Date(data.endDate) : undefined,
@@ -97,9 +106,13 @@ export default class LectureService {
     return lecture.reload();
   }
 
-  async deleteLecture(id: number, userId: number) {
+  async deleteLecture(id: number, classRoomId: number, userId: number) {
     const lecturer = await this.lecturerService.findLecturerBy({ userId });
-    const lecture = await this.findBy({ id, lecturerId: lecturer.id });
+    const lecture = await this.findBy({
+      id,
+      lecturerId: lecturer.id,
+      classRoomId,
+    });
     lecture.destroy();
   }
 

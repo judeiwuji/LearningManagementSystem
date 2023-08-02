@@ -10,6 +10,7 @@ import { ClassroomsComponent } from './pages/classrooms/classrooms.component';
 import { StudentsComponent } from './pages/students/students.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { LecturersComponent } from './pages/lecturers/lecturers.component';
+import { ClassroomDetailComponent } from './pages/classroom-detail/classroom-detail.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -28,6 +29,11 @@ const routes: Routes = [
   {
     path: 'classrooms',
     component: ClassroomsComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'classrooms/:id',
+    component: ClassroomDetailComponent,
     canActivate: [authGuard],
   },
   {

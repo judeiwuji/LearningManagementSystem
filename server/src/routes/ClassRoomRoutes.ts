@@ -14,7 +14,7 @@ ClassRoomRoutes.post(
   ClassRoomController.addStudent
 );
 ClassRoomRoutes.delete(
-  '/classrooms/students/:id',
+  '/classrooms/:cid/students/:id',
   ensureAuth,
   ClassRoomController.removeStudent
 );

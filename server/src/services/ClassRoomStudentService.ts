@@ -52,11 +52,11 @@ export default class ClassRoomStudentService {
       throw new Error('Student already exists');
     }
 
-    await ClassRoomStudent.create({
+    const classroomStudent = await ClassRoomStudent.create({
       classRoomId,
       studentId: student.id,
     });
-    return student;
+    return classroomStudent.reload({ include: this.classRoomStudentInclude() });
   }
 
   async getStudents(classRoomId: number, page: number, search?: string) {
@@ -84,6 +84,7 @@ export default class ClassRoomStudentService {
       include: this.classRoomStudentInclude(query),
       attributes: ClassRoomStudentDTO,
       where: { classRoomId },
+      order: [['student', 'user', 'firstname', 'ASC']],
     });
 
     return {
@@ -139,8 +140,8 @@ export default class ClassRoomStudentService {
     };
   }
 
-  async removeStudent(id: number) {
-    const classRoomStudent = await this.findBy({ id });
+  async removeStudent(classRoomId: number, id: number) {
+    const classRoomStudent = await this.findBy({ classRoomId, id });
 
     await classRoomStudent.destroy();
   }

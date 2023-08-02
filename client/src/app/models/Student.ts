@@ -11,6 +11,7 @@ export interface Student {
   levelId: number;
   level: Level;
   processing?: boolean;
+  added: boolean;
 }
 
 export interface StudentActionRequest extends UserActionRequest {

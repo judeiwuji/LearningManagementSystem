@@ -52,10 +52,16 @@ export default class LectureController {
 
   static async updateLecture(req: IRequest, res: Response) {
     const id = Number(req.params.id);
+    const classRoomId = Number(req.params.cid);
     try {
       const user = req.user;
       const data = await validate(LectureUpdateSchema, req.body);
-      const update = await lectureService.updateLecture(id, data, user?.id);
+      const update = await lectureService.updateLecture(
+        id,
+        classRoomId,
+        data,
+        user?.id
+      );
       res.send(update);
     } catch (error: any) {
       httpErrorHandler(error, res);
@@ -64,10 +70,10 @@ export default class LectureController {
 
   static async deleteLecture(req: IRequest, res: Response) {
     const id = Number(req.params.id);
-
+    const classRoomId = Number(req.params.cid);
     try {
       const user = req.user;
-      await lectureService.deleteLecture(id, user?.id);
+      await lectureService.deleteLecture(id, classRoomId, user?.id);
       res.status(204).send({ status: 'OK' });
     } catch (error: any) {
       httpErrorHandler(error, res);

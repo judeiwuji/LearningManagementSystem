@@ -215,6 +215,17 @@ label {
 }
 /* icon-lg */
 
+/* avatar */
+.avatar {
+  display: inline-block;
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  background-color: var(--app-grey);
+}
+/* avatar */
+
 /* Queries */
 @media screen and (min-width: 767px) {
   .app-hero-shape--circle {

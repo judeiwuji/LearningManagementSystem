@@ -44,15 +44,6 @@
   margin-bottom: 3rem;
 }
 
-.avatar {
-  display: inline-block;
-  width: 2em;
-  height: 2em;
-  border-radius: 50%;
-  border: 2px solid #ffffff;
-  background-color: var(--app-grey);
-}
-
 .sidebar-nav {
   position: relative;
   list-style: none;

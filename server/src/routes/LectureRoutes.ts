@@ -19,12 +19,12 @@ LectureRoutes.post(
   LectureController.createLecture
 );
 LectureRoutes.put(
-  '/classrooms/lectures/:id',
+  '/classrooms/:cid/lectures/:id',
   ensureAuth,
   LectureController.updateLecture
 );
 LectureRoutes.delete(
-  '/classrooms/lectures/:id',
+  '/classrooms/:cid/lectures/:id',
   ensureAuth,
   LectureController.deleteLecture
 );

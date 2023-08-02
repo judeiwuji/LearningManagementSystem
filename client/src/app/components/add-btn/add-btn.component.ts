@@ -13,6 +13,9 @@ export class AddBtnComponent {
   @Input()
   title = 'Add';
 
+  @Input()
+  loading?: boolean;
+
   faPlus = faPlus;
 
   add() {
