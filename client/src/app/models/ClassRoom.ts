@@ -1,12 +1,14 @@
 import { Lecturer } from './Lecturer';
 
-export interface ClassRoom {
+export interface Classroom {
   id: number;
   lecturerId: number;
   lecturer: Lecturer;
   title: string;
+  updatedAt: string;
+  processing?: boolean;
 }
 
-export interface ClassRoomActionRequest {
+export interface ClassroomActionRequest {
   title: string;
 }

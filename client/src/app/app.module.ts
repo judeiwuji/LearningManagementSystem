@@ -46,6 +46,7 @@ import {
   faWifi,
 } from '@fortawesome/free-solid-svg-icons';
 import { AuthInterceptor } from './auth.interceptor';
+import { ClassroomFormComponent } from './modals/classroom-form/classroom-form.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import { AuthInterceptor } from './auth.interceptor';
     LevelDropdownListComponent,
     LecturerFormComponent,
     StatsCardComponent,
+    ClassroomFormComponent,
   ],
   imports: [
     BrowserModule,
