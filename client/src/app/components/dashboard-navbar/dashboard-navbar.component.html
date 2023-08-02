@@ -19,7 +19,12 @@
             [ngbPopover]="popContent"
             placement="bottom-end"
           >
-            <fa-icon [icon]="faUserAlt"></fa-icon>
+            <div class="d-flex align-items-center">
+              <span class="me-2 small fw-bold">
+                howdy {{ profile?.firstname }}
+              </span>
+              <img [src]="profile?.avatar" alt="Avatar" class="avatar" />
+            </div>
           </a>
         </li>
       </ul>

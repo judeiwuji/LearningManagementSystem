@@ -57,21 +57,55 @@ export default class AppService {
     const lectureService = new LectureService();
     const quizService = new QuizService();
     const studentService = new StudentService();
-    const stats: any = {
-      departments: await departmentService.getCount(),
-      lecturers: await lecturerService.getCount(),
-      students: await studentService.getCount(),
-    };
+    let stats: any[];
 
     switch (user.role) {
       case Roles.LECTURER:
-        stats.classRooms = await classRoomService.getCount(user.id);
-        stats.lectures = await lectureService.getCount(user.id);
-        stats.quizzes = await quizService.getCount(user.id);
+        stats = [
+          {
+            name: 'classrooms',
+            count: await classRoomService.getCount(user.id),
+            icon: 'wifi',
+          },
+          {
+            name: 'lectures',
+            count: await lectureService.getCount(user.id),
+            icon: 'newspaper',
+          },
+          {
+            name: 'quizzes',
+            count: await quizService.getCount(user.id),
+            icon: 'tasks',
+          },
+        ];
         break;
       case Roles.STUDENT:
-        stats.classRooms = await classRoomStudentService.getCount(user.id);
+        stats = [
+          {
+            name: 'classrooms',
+            count: await classRoomStudentService.getCount(user.id),
+            icon: 'wifi',
+          },
+        ];
         break;
+      default:
+        stats = [
+          {
+            name: 'departments',
+            count: await departmentService.getCount(),
+            icon: 'list-alt',
+          },
+          {
+            name: 'lecturers',
+            count: await lecturerService.getCount(),
+            icon: 'chalkboard-teacher',
+          },
+          {
+            name: 'students',
+            count: await studentService.getCount(),
+            icon: 'users',
+          },
+        ];
     }
 
     return stats;

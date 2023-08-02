@@ -4,7 +4,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {
+  FaIconLibrary,
+  FontAwesomeModule,
+} from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -33,6 +36,13 @@ import { StudentFormComponent } from './modals/student-form/student-form.compone
 import { DepartmentDropdownListComponent } from './components/department-dropdown-list/department-dropdown-list.component';
 import { LevelDropdownListComponent } from './components/level-dropdown-list/level-dropdown-list.component';
 import { LecturerFormComponent } from './modals/lecturer-form/lecturer-form.component';
+import { StatsCardComponent } from './components/stats-card/stats-card.component';
+import {
+  faChalkboardTeacher,
+  faListAlt,
+  faUsers,
+  faWifi,
+} from '@fortawesome/free-solid-svg-icons';
 
 @NgModule({
   declarations: [
@@ -60,6 +70,7 @@ import { LecturerFormComponent } from './modals/lecturer-form/lecturer-form.comp
     DepartmentDropdownListComponent,
     LevelDropdownListComponent,
     LecturerFormComponent,
+    StatsCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,4 +85,13 @@ import { LecturerFormComponent } from './modals/lecturer-form/lecturer-form.comp
   providers: [CookieService],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(library: FaIconLibrary) {
+    // Add an icon to the library for convenient access in other components
+    library.addIcons(faUsers);
+    library.addIcons(faListAlt);
+    library.addIcons(faWifi);
+    library.addIcons(faChalkboardTeacher);
+    library.addIcons(faChalkboardTeacher);
+  }
+}

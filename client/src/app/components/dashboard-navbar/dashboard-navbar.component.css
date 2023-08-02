@@ -45,8 +45,9 @@
 }
 
 .avatar {
-  width: 3em;
-  height: 3em;
+  display: inline-block;
+  width: 2em;
+  height: 2em;
   border-radius: 50%;
   border: 2px solid #ffffff;
   background-color: var(--app-grey);

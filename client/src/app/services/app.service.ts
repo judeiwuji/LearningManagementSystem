@@ -17,7 +17,9 @@ export class AppService {
   }
 
   getStats() {
-    return this.http.get<AppStats>(`${this.API_URL}/stats`);
+    return this.http.get<AppStats[]>(`${this.API_URL}/stats`, {
+      withCredentials: true,
+    });
   }
 
   getLevels() {

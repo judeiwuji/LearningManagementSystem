@@ -1,8 +1,7 @@
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
+
 export interface AppStats {
-  departments: number;
-  classRooms: number;
-  lecturers: number;
-  lectures: number;
-  students: number;
-  quizzes: number;
+  name: string;
+  count: number;
+  icon: IconProp;
 }

@@ -208,6 +208,13 @@ label {
 
 /* app-dropdown */
 
+/* icon-lg */
+.icon-lg {
+  font-size: 3rem;
+  color: var(--app-primary);
+}
+/* icon-lg */
+
 /* Queries */
 @media screen and (min-width: 767px) {
   .app-hero-shape--circle {
