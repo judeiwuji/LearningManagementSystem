@@ -105,6 +105,7 @@ export default class LecturerService {
       offset: pager.startIndex,
       include: this.lecturerInclude(query),
       attributes: LecturerDTO,
+      order: [['user', 'firstname', 'ASC']],
     });
 
     return {

@@ -3,7 +3,7 @@
   --app-primary-dark: #3a26c0;
   --app-primary-light: #4934d49f;
   --app-white: #ffffff;
-  --app-grey: #fafafa;
+  --app-grey: #f0f0f0;
   --app-grey-dark: #c0c0c0;
   --app-black: #000000;
   --app-secondary: #f73b3b;
@@ -163,6 +163,50 @@ label {
   font-weight: 600;
 }
 /* modal-title-text */
+
+/* app-dropdown */
+.app-popover {
+  min-width: 20em;
+}
+
+.app-dropdown {
+  max-height: 20em;
+  overflow: auto;
+  padding: 0 0.3rem;
+}
+
+.app-dropdown-menu {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+}
+
+.app-dropdown-menu li > button {
+  display: inline-block;
+  border: 0;
+  border-radius: 10px;
+  background-color: transparent;
+  padding: 0.3rem 0.65rem;
+  margin-bottom: 0.2rem;
+  text-align: left;
+  text-transform: capitalize;
+  transition: all 0.3rem ease-in-out;
+  width: 100%;
+}
+
+.app-dropdown-menu li > button:hover {
+  background-color: var(--app-grey);
+}
+
+.app-dropdown-menu li > button.active {
+  background-color: var(--app-grey);
+}
+
+.app-dropdown-menu li > button:not(:last-child) {
+  margin-bottom: 0.5rem;
+}
+
+/* app-dropdown */
 
 /* Queries */
 @media screen and (min-width: 767px) {

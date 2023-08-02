@@ -10,6 +10,7 @@ export interface Student {
   department: Department;
   levelId: number;
   level: Level;
+  processing?: boolean;
 }
 
 export interface StudentActionRequest extends UserActionRequest {

@@ -1,4 +1,4 @@
-import { Op } from 'sequelize';
+import { Includeable, Op } from 'sequelize';
 import UserDTO from '../models/DTOs/UserDTO';
 import Pagination from '../models/Pagination';
 import Student, {
@@ -17,9 +17,13 @@ import DepartmentDTO from '../models/DTOs/DepartmentDTO';
 import LevelDTO from '../models/DTOs/LevelDTO';
 
 export default class StudentService {
-  studentInclude(query: any = {}) {
+  studentInclude(query: any = {}): Includeable[] {
     return [
-      { model: User, attributes: UserDTO, where: query },
+      {
+        model: User,
+        attributes: UserDTO,
+        where: query,
+      },
       { model: Department, attributes: DepartmentDTO },
       { model: Level, attributes: LevelDTO },
     ];
@@ -109,6 +113,7 @@ export default class StudentService {
       offset: pager.startIndex,
       include: this.studentInclude(query),
       attributes: StudentDTO,
+      order: [['user', 'firstname', 'ASC']],
     });
 
     return {

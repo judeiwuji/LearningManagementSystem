@@ -1,0 +1,32 @@
+<input
+  type="text"
+  class="form-control text-uppercase"
+  placeholder="Level"
+  readonly
+  [ngbPopover]="popContent"
+  [autoClose]="false"
+  triggers="manual"
+  #list="ngbPopover"
+  (click)="list.open()"
+  placement="bottom-end"
+  popoverClass="app-popover"
+  [value]="selected?.name"
+/>
+
+<ng-template #popContent>
+  <div class="app-dropdown">
+    <ul class="app-dropdown-menu pt-3">
+      <ng-container *ngFor="let item of levels">
+        <li>
+          <button
+            (click)="select(item); list.close()"
+            type="button"
+            [ngClass]="{ active: item.id === selected?.id }"
+          >
+            <span class="text-uppercase">{{ item.name }}</span>
+          </button>
+        </li>
+      </ng-container>
+    </ul>
+  </div>
+</ng-template>

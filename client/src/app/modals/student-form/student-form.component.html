@@ -1,0 +1,100 @@
+<div class="modal-header">
+  <h5 class="modal-title-text text-muted">
+    <span *ngIf="data">Edit</span> <span *ngIf="!data">New</span> Student
+  </h5>
+  <button class="btn-close" (click)="close()"></button>
+</div>
+
+<div class="modal-body">
+  <form [formGroup]="dataForm" (ngSubmit)="save()">
+    <div class="mb-3">
+      <div class="row">
+        <div class="col-12 col-md-6 mb-3 mb-md-0">
+          <label for="firstname">Firstname</label>
+          <input
+            id="firstname"
+            type="text"
+            class="form-control"
+            formControlName="firstname"
+            placeholder="Firstname"
+            [ngClass]="{
+              'border-danger': fc['firstname'].touched && fc['firstname'].errors
+            }"
+          />
+        </div>
+        <div class="col-12 col-md-6">
+          <label for="firstname">Lastname</label>
+          <input
+            id="lastname"
+            type="text"
+            class="form-control"
+            formControlName="lastname"
+            placeholder="Lastname"
+            [ngClass]="{
+              'border-danger': fc['lastname'].touched && fc['lastname'].errors
+            }"
+          />
+        </div>
+      </div>
+    </div>
+
+    <ng-container *ngIf="!data">
+      <div class="mb-3">
+        <div class="row">
+          <div class="col-12 col-md-6 mb-3 mb-md-0">
+            <label for="email">Email</label>
+            <input
+              id="email"
+              type="email"
+              class="form-control"
+              formControlName="email"
+              placeholder="Email"
+              [ngClass]="{
+                'border-danger': fc['email'].touched && fc['email'].errors
+              }"
+            />
+          </div>
+          <div class="col-12 col-md-6">
+            <label for="fpassword">Password</label>
+            <input
+              id="password"
+              type="password"
+              class="form-control"
+              formControlName="password"
+              placeholder="Password"
+              [ngClass]="{
+                'border-danger': fc['password'].touched && fc['password'].errors
+              }"
+            />
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <div class="mb-3">
+      <div class="row">
+        <div class="col-12 col-md-6 mb-3 mb-md-0">
+          <label for="email">Department</label>
+          <app-department-dropdown-list
+            [selectedId]="fc['departmentId'].value"
+            (onSelect)="onSelectDepartment($event)"
+          ></app-department-dropdown-list>
+        </div>
+        <div class="col-12 col-md-6">
+          <label for="fpassword">Level</label>
+          <app-level-dropdown-list
+            [selectedId]="fc['levelId'].value"
+            (onSelect)="onSelectLevel($event)"
+          ></app-level-dropdown-list>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-grid">
+      <button class="btn btn-full">
+        <span *ngIf="data">Save</span> <span *ngIf="!data">Create</span>
+        <app-loading [loading]="processing"></app-loading>
+      </button>
+    </div>
+  </form>
+</div>

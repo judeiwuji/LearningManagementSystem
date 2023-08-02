@@ -29,6 +29,9 @@ import { FootNoteComponent } from './components/foot-note/foot-note.component';
 import { MoreOptionBtnComponent } from './components/more-option-btn/more-option-btn.component';
 import { DepartmentFormComponent } from './modals/department-form/department-form.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { StudentFormComponent } from './modals/student-form/student-form.component';
+import { DepartmentDropdownListComponent } from './components/department-dropdown-list/department-dropdown-list.component';
+import { LevelDropdownListComponent } from './components/level-dropdown-list/level-dropdown-list.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +55,9 @@ import { LoadingComponent } from './components/loading/loading.component';
     MoreOptionBtnComponent,
     DepartmentFormComponent,
     LoadingComponent,
+    StudentFormComponent,
+    DepartmentDropdownListComponent,
+    LevelDropdownListComponent,
   ],
   imports: [
     BrowserModule,

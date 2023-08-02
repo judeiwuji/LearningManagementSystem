@@ -47,6 +47,7 @@ export default class DepartmentService {
       offset: pager.startIndex,
       attributes: DepartmentDTO,
       where: query,
+      order: [['name', 'ASC']],
     });
 
     return {

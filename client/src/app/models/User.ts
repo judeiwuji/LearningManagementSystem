@@ -4,11 +4,12 @@ export interface User {
   lastname: string;
   email: string;
   avatar: string;
+  password?: string;
 }
 
 export interface UserActionRequest {
-  firstname: string;
-  lastname: string;
-  email: string;
-  password: string;
+  firstname?: string;
+  lastname?: string;
+  email?: string;
+  password?: string;
 }

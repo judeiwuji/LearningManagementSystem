@@ -1,0 +1,45 @@
+<input
+  type="text"
+  class="form-control text-capitalize"
+  placeholder="Department"
+  readonly
+  [ngbPopover]="popContent"
+  [autoClose]="false"
+  triggers="manual"
+  #list="ngbPopover"
+  (click)="list.open()"
+  placement="bottom-end"
+  popoverClass="app-popover"
+  [value]="selected?.name"
+/>
+
+<ng-template #popContent>
+  <div class="app-dropdown">
+    <app-search-form (onSearch)="onSearch($event)"></app-search-form>
+
+    <ul class="app-dropdown-menu pt-3">
+      <ng-container *ngFor="let item of pager.results">
+        <li>
+          <button
+            (click)="select(item); list.close()"
+            type="button"
+            [ngClass]="{ active: item.id === selected?.id }"
+          >
+            {{ item.name }}
+          </button>
+        </li>
+      </ng-container>
+    </ul>
+
+    <!-- Load more Btn -->
+    <ng-container *ngIf="pager.page < pager.totalPages">
+      <div class="text-center py-2">
+        <app-load-more-btn
+          [loading]="loading"
+          (onLoad)="loadData(pager.page + 1)"
+        ></app-load-more-btn>
+      </div>
+    </ng-container>
+    <!-- Load more Btn -->
+  </div>
+</ng-template>
