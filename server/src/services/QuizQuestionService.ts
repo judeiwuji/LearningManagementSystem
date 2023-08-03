@@ -16,6 +16,7 @@ import QuestionOption, {
 import AppError from '../models/errors/AppError';
 import QuizQuestionDTO from '../models/DTOs/QuizQuestionDTO';
 import QuestionOptionDTO from '../models/DTOs/QuestionOptionDTO';
+import Lecturer from '../models/Lecturer';
 
 export default class QuizQuestionService {
   private questionInclude() {
@@ -79,7 +80,13 @@ export default class QuizQuestionService {
     return question;
   }
 
-  async getQuestions(quizId: number, page: number, search?: string) {
+  async getQuestions(
+    user: User,
+    quizId: number,
+    page: number,
+    search?: string
+  ) {
+    user = await user.reload({ include: [{ model: Lecturer }] });
     const pager = new Pagination(page);
     const query: any = {
       quizId,
@@ -94,7 +101,10 @@ export default class QuizQuestionService {
       limit: pager.pageSize,
       offset: pager.startIndex,
       include: this.questionInclude(),
-      attributes: QuizQuestionDTO,
+      attributes: user.lecturer
+        ? [...QuizQuestionDTO, 'answer']
+        : QuizQuestionDTO,
+      where: query,
     });
 
     return {

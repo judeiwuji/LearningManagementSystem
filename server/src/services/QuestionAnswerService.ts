@@ -1,6 +1,8 @@
+import DepartmentDTO from '../models/DTOs/DepartmentDTO';
 import QuizDTO from '../models/DTOs/QuizDTO';
 import StudentDTO from '../models/DTOs/StudentDTO';
 import UserDTO from '../models/DTOs/UserDTO';
+import Department from '../models/Department';
 import Pagination from '../models/Pagination';
 import QuestionAnswer, {
   QuestionAnswerCreationAttributes,
@@ -76,12 +78,15 @@ export default class QuestionAnswerService {
 
     const { rows, count } = await QuestionAnswer.findAndCountAll({
       group: ['studentId'],
-      attributes: ['id', [DB.fn('sum', DB.col('score')), 'totalScore']],
+      attributes: ['id', [DB.fn('sum', DB.col('score')), 'score']],
       include: [
         {
           model: Student,
           attributes: StudentDTO,
-          include: [{ model: User, attributes: UserDTO }],
+          include: [
+            { model: User, attributes: UserDTO },
+            { model: Department, attributes: DepartmentDTO },
+          ],
         },
       ],
       limit: pager.pageSize,

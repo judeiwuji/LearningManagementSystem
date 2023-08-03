@@ -1,12 +1,13 @@
-<app-dashboard-navbar [title]="'Quizzes'"></app-dashboard-navbar>
+<app-dashboard-navbar [title]="'Quiz Questions'"></app-dashboard-navbar>
 <div class="dashboard-main">
   <div class="container py-3">
     <div class="mb-3">
       <app-breadcrumb
-        backLink="/classrooms/{{ classRoomId }}"
-        [title]="'Classroom Quizzes'"
+        backLink="/classrooms/{{ classRoomId }}/quizzes"
+        [title]="'Quiz: ' + quiz?.title"
       ></app-breadcrumb>
     </div>
+
     <!-- Content -->
     <div class="card app-card content-card">
       <div class="card-body">
@@ -19,7 +20,12 @@
             </div>
 
             <div>
-              <app-add-btn [title]="'Quiz'" (onAdd)="onAdd()"></app-add-btn>
+              <app-action-btn
+                [title]="'View Results'"
+                class="me-2"
+                (onAction)="viewResults()"
+              ></app-action-btn>
+              <app-add-btn [title]="'Question'" (onAdd)="onAdd()"></app-add-btn>
             </div>
           </div>
         </div>
@@ -30,9 +36,8 @@
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>Title</th>
-                  <th class="text-center">Status</th>
-                  <th>Duration (minutes)</th>
+                  <th>Question</th>
+                  <th>Answer</th>
                   <th class="text-center">Action</th>
                 </tr>
               </thead>
@@ -40,29 +45,14 @@
                 <ng-container *ngFor="let item of pager.results; index as i">
                   <tr>
                     <td>{{ i + 1 }}.</td>
-                    <td class="text-capitalize">{{ item.title }}</td>
+                    <td class="text-capitalize">{{ item.question }}</td>
+                    <td class="text-capitalize">{{ item.answer }}</td>
                     <td class="text-center">
-                      <app-quiz-status [quiz]="item"></app-quiz-status>
-                    </td>
-                    <td>{{ item.duration }}</td>
-                    <td class="text-center">
-                      <div
-                        class="d-flex align-items-center justify-content-center"
-                      >
-                        <a
-                          routerLink="/classrooms/{{
-                            item.classRoomId
-                          }}/quizzes/{{ item.id }}"
-                          class="btn btn-sm btn-full me-2"
-                        >
-                          View
-                        </a>
-                        <app-more-option-btn
-                          (onEdit)="onEdit(item)"
-                          (onDelete)="onDelete(item)"
-                          [loading]="item.processing"
-                        ></app-more-option-btn>
-                      </div>
+                      <app-more-option-btn
+                        (onEdit)="onEdit(item)"
+                        (onDelete)="onDelete(item)"
+                        [loading]="item.processing"
+                      ></app-more-option-btn>
                     </td>
                   </tr>
                 </ng-container>

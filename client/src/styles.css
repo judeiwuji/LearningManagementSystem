@@ -30,7 +30,9 @@ html {
 .btn-full-lg:hover,
 .btn-full:hover,
 .btn-full-lg:focus,
-.btn-full:focus {
+.btn-full:focus,
+.app-btn-primary:hover,
+.app-btn-primary:focus {
   text-decoration: none;
   background-color: var(--app-primary-dark);
   color: var(--app-white);
@@ -45,10 +47,12 @@ html {
 
 .app-btn-primary {
   background-color: var(--app-primary) !important;
+  color: var(--app-white);
 }
 
 .app-btn-secondary {
   background-color: var(--app-secondary) !important;
+  color: var(--app-white);
 }
 
 .app-btn-light {

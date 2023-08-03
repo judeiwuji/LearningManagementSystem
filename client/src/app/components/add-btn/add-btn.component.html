@@ -1,5 +1,7 @@
-<button class="btn btn-sm btn-full" (click)="add()">
-  <fa-icon [icon]="faPlus" class="mr-2"></fa-icon>
-  {{ title }}
-  <app-loading [loading]="loading"></app-loading>
+<button class="btn btn-sm btn-full" (click)="add()" type="button">
+  <div class="d-flex justify-content-center align-items-center">
+    <fa-icon [icon]="faPlus" class="mr-2"></fa-icon>
+    <span>{{ title }}</span>
+    <app-loading [loading]="loading"></app-loading>
+  </div>
 </button>

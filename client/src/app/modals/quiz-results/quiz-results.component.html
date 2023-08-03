@@ -1,0 +1,63 @@
+<div class="modal-header">
+  <h5 class="modal-title">Quiz Results</h5>
+  <button class="btn-close" (click)="close()"></button>
+</div>
+
+<div class="modal-body">
+  <div class="container">
+    <div class="card app-card content-card">
+      <div class="card-body">
+        <div class="card-body">
+          <div class="app-table-container">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Firstname</th>
+                  <th>Lastname</th>
+                  <th>Department</th>
+                  <th>Score</th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let item of pager.results; index as i">
+                  <tr>
+                    <td>{{ i + 1 }}.</td>
+                    <td class="text-capitalize">
+                      {{ item.student.user.firstname }}
+                    </td>
+                    <td class="text-capitalize">
+                      {{ item.student.user.lastname }}
+                    </td>
+                    <td class="text-capitalize">
+                      {{ item.student.department.name }}
+                    </td>
+                    <td class="text-capitalize">{{ item.score }}</td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Load more Btn -->
+          <ng-container *ngIf="pager.page < pager.totalPages">
+            <div class="text-center">
+              <app-load-more-btn
+                [loading]="loading"
+                (onLoad)="loadData(pager.page + 1)"
+              ></app-load-more-btn>
+            </div>
+          </ng-container>
+          <!-- Load more Btn -->
+        </div>
+
+        <div class="card-footer text-center">
+          <app-foot-note
+            [currentPage]="pager.page"
+            [totalPages]="pager.totalPages"
+          ></app-foot-note>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

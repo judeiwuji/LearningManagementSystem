@@ -55,6 +55,9 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
 import { QuizzesComponent } from './pages/quizzes/quizzes.component';
 import { QuizFormComponent } from './modals/quiz-form/quiz-form.component';
 import { QuizStatusComponent } from './components/quiz-status/quiz-status.component';
+import { QuizDetailComponent } from './pages/quiz-detail/quiz-detail.component';
+import { QuizQuestionFormComponent } from './modals/quiz-question-form/quiz-question-form.component';
+import { QuizResultsComponent } from './modals/quiz-results/quiz-results.component';
 
 @NgModule({
   declarations: [
@@ -92,6 +95,9 @@ import { QuizStatusComponent } from './components/quiz-status/quiz-status.compon
     QuizzesComponent,
     QuizFormComponent,
     QuizStatusComponent,
+    QuizDetailComponent,
+    QuizQuestionFormComponent,
+    QuizResultsComponent,
   ],
   imports: [
     BrowserModule,

@@ -7,6 +7,7 @@ import {
   QuizQuestionCreationSchema,
   QuizQuestionUpdateSchema,
 } from '../validators/schemas/QuizQuestionSchema';
+import User from '../models/User';
 
 const questionService = new QuizQuestionService();
 export default class QuizQuestionController {
@@ -32,12 +33,13 @@ export default class QuizQuestionController {
     }
   }
 
-  static async getQuestions(req: Request, res: Response) {
-    const qid = Number(req.params.QuizQuestionDTO);
+  static async getQuestions(req: IRequest, res: Response) {
+    const user = req.user as User;
+    const qid = Number(req.params.qid);
     const page = Number(req.query.page) || 1;
     const search = req.query.search as string;
     try {
-      const data = await questionService.getQuestions(qid, page, search);
+      const data = await questionService.getQuestions(user, qid, page, search);
       res.send(data);
     } catch (error) {
       httpErrorHandler(error, res);
