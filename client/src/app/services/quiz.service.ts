@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Pagination } from '../models/Pagination';
-import { Quiz, QuizActionRequest } from '../models/Quiz';
+import { Quiz, QuizActionRequest, StudentQuiz } from '../models/Quiz';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { QuizResult } from '../models/QuizResult';
+import { QuizResult, StudentQuizResult } from '../models/QuizResult';
 
 @Injectable({
   providedIn: 'root',
@@ -40,6 +40,24 @@ export class QuizService {
   getQuizResults(id: number, page = 1, search = '') {
     return this.http.get<Pagination<QuizResult>>(
       `${this.API_URL}/quizzes/${id}/results?page=${page}&search=${search}`,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
+  getStudentQuizResults(page = 1, search = '') {
+    return this.http.get<Pagination<StudentQuizResult>>(
+      `${this.API_URL}/student/quizzes/results?page=${page}&search=${search}`,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
+  getStudentQuizzes(page = 1, search = '') {
+    return this.http.get<Pagination<StudentQuiz>>(
+      `${this.API_URL}/student/quizzes?page=${page}&search=${search}`,
       {
         withCredentials: true,
       }

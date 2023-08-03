@@ -28,4 +28,9 @@ QuizRoutes.delete(
   ensureAuth,
   QuizController.deleteQuiz
 );
+QuizRoutes.get(
+  '/student/quizzes',
+  ensureAuth,
+  QuizController.getStudentQuizzes
+);
 export default QuizRoutes;

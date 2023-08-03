@@ -1,0 +1,68 @@
+<div class="py-3">
+  <div class="mb-3">
+    <h5 class="fw-bold text-muted mb-3">Active Quizzes</h5>
+  </div>
+  <div class="card app-card content-card">
+    <div class="card-body">
+      <div class="card-header">
+        <div
+          class="d-flex justify-content-between flex-wrap align-items-center"
+        >
+          <div class="mb-3 mb-sm-0">
+            <app-search-form (onSearch)="onSearch($event)"></app-search-form>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div class="app-table-container">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Quiz</th>
+                <th>Lecturer</th>
+                <th class="text-center">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let item of pager.results; index as i">
+                <tr>
+                  <td>{{ i + 1 }}.</td>
+                  <td class="text-capitalize" style="width: 20em">
+                    {{ item.title }}
+                  </td>
+                  <td class="text-capitalize" style="width: 10em">
+                    {{ item.lecturer.user.firstname }}
+                    {{ item.lecturer.user.lastname }}
+                  </td>
+                  <td class="text-center">
+                    <app-action-btn [title]="'Take Quiz'"></app-action-btn>
+                  </td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Load more Btn -->
+        <ng-container *ngIf="pager.page < pager.totalPages">
+          <div class="text-center">
+            <app-load-more-btn
+              [loading]="loading"
+              (onLoad)="loadData(pager.page + 1)"
+            ></app-load-more-btn>
+          </div>
+        </ng-container>
+        <!-- Load more Btn -->
+      </div>
+
+      <div class="card-footer text-center">
+        <app-foot-note
+          [currentPage]="pager.page"
+          [totalPages]="pager.totalPages"
+        ></app-foot-note>
+      </div>
+    </div>
+  </div>
+</div>

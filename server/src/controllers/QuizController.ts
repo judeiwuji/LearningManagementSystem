@@ -43,6 +43,18 @@ export default class QuizController {
     }
   }
 
+  static async getStudentQuizzes(req: IRequest, res: Response) {
+    const page = Number(req.query.page) || 1;
+    const search = req.query.search as string;
+    const user = req.user;
+    try {
+      const data = await quizService.getStudentQuizzes(user?.id, page, search);
+      res.send(data);
+    } catch (error) {
+      httpErrorHandler(error, res);
+    }
+  }
+
   static async updateQuiz(req: Request, res: Response) {
     const id = Number(req.params.id);
     const cid = Number(req.params.cid);

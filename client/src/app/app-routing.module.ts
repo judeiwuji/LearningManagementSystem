@@ -15,6 +15,7 @@ import { VirtualClassroomComponent } from './pages/virtual-classroom/virtual-cla
 import { QuizzesComponent } from './pages/quizzes/quizzes.component';
 import { QuizDetailComponent } from './pages/quiz-detail/quiz-detail.component';
 import { StudentClassroomsComponent } from './pages/student-classrooms/student-classrooms.component';
+import { StudentQuizResultsComponent } from './pages/student-quiz-results/student-quiz-results.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -58,6 +59,11 @@ const routes: Routes = [
   {
     path: 'student/classrooms',
     component: StudentClassroomsComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'student/quizresults',
+    component: StudentQuizResultsComponent,
     canActivate: [authGuard],
   },
   {

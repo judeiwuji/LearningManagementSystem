@@ -59,6 +59,8 @@ import { QuizDetailComponent } from './pages/quiz-detail/quiz-detail.component';
 import { QuizQuestionFormComponent } from './modals/quiz-question-form/quiz-question-form.component';
 import { QuizResultsComponent } from './modals/quiz-results/quiz-results.component';
 import { StudentClassroomsComponent } from './pages/student-classrooms/student-classrooms.component';
+import { StudentQuizResultsComponent } from './pages/student-quiz-results/student-quiz-results.component';
+import { StudentQuizzesComponent } from './components/student-quizzes/student-quizzes.component';
 
 @NgModule({
   declarations: [
@@ -100,6 +102,8 @@ import { StudentClassroomsComponent } from './pages/student-classrooms/student-c
     QuizQuestionFormComponent,
     QuizResultsComponent,
     StudentClassroomsComponent,
+    StudentQuizResultsComponent,
+    StudentQuizzesComponent,
   ],
   imports: [
     BrowserModule,

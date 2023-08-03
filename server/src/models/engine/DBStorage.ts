@@ -1,4 +1,4 @@
-import { Sequelize } from 'sequelize-typescript';
+import { HasOne, Sequelize } from 'sequelize-typescript';
 import * as mysql from 'mysql2';
 import * as dotenv from 'dotenv';
 import User from '../User';
@@ -47,6 +47,11 @@ const DB = new Sequelize({
     QuestionAnswer,
     UserSession,
   ],
+});
+
+Quiz.hasOne(ClassRoomStudent, {
+  foreignKey: 'classRoomId',
+  as: 'classRoomStudent',
 });
 
 export default DB;

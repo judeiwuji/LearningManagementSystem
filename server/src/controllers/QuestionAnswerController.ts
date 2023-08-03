@@ -43,9 +43,9 @@ export default class QuestionAnswerController {
   static async getStudentQuizzesResult(req: IRequest, res: Response) {
     try {
       const page = Number(req.query.page) || 1;
-      const studentId = Number(req.params.sid);
+      const user = req.user;
       const data = await questionAnswerService.getStudentQuizzesResult(
-        studentId,
+        user?.id,
         page
       );
       res.send(data);

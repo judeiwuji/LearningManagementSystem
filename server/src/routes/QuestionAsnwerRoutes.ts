@@ -15,7 +15,7 @@ QuestionAnswerRoutes.get(
 );
 
 QuestionAnswerRoutes.get(
-  '/quizzes/students/:sid/results',
+  '/student/quizzes/results',
   ensureAuth,
   QuestionAnswerController.getStudentQuizzesResult
 );

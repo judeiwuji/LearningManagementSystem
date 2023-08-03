@@ -1,8 +1,12 @@
+import ClassRoom from '../models/ClassRoom';
+import ClassRoomDTO from '../models/DTOs/ClassRoomDTO';
 import DepartmentDTO from '../models/DTOs/DepartmentDTO';
+import LecturerDTO from '../models/DTOs/LecturerDTO';
 import QuizDTO from '../models/DTOs/QuizDTO';
 import StudentDTO from '../models/DTOs/StudentDTO';
 import UserDTO from '../models/DTOs/UserDTO';
 import Department from '../models/Department';
+import Lecturer from '../models/Lecturer';
 import Pagination from '../models/Pagination';
 import QuestionAnswer, {
   QuestionAnswerCreationAttributes,
@@ -54,16 +58,30 @@ export default class QuestionAnswerService {
     };
   }
 
-  async getStudentQuizzesResult(studentId: number, page = 1) {
+  async getStudentQuizzesResult(userId: number, page = 1) {
+    const student = await this.studentService.findStudentBy({ userId });
     const pager = new Pagination(page);
 
     const { rows, count } = await QuestionAnswer.findAndCountAll({
       group: ['quizId'],
-      attributes: ['id', [DB.fn('sum', DB.col('score')), 'totalScore']],
-      include: [{ model: Quiz, attributes: QuizDTO }],
+      attributes: ['id', [DB.fn('sum', DB.col('score')), 'score']],
+      include: [
+        {
+          model: Quiz,
+          attributes: QuizDTO,
+          include: [
+            { model: ClassRoom, attributes: ClassRoomDTO },
+            {
+              model: Lecturer,
+              attributes: LecturerDTO,
+              include: [{ model: User, attributes: UserDTO }],
+            },
+          ],
+        },
+      ],
       limit: pager.pageSize,
       offset: pager.startIndex,
-      where: { studentId },
+      where: { studentId: student.id },
     });
 
     return {

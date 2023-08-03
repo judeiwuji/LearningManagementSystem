@@ -1,10 +1,11 @@
 import { Classroom } from './ClassRoom';
+import { ClassroomStudent } from './ClassroomStudent';
 import { Lecturer } from './Lecturer';
 
 export interface Quiz {
   id: number;
   classRoomId: number;
-  classroom: Classroom;
+  classRoom: Classroom;
   lecturerId: number;
   lecturer: Lecturer;
   title: string;
@@ -18,4 +19,16 @@ export interface QuizActionRequest {
   title?: string;
   duration?: number;
   status?: number;
+}
+
+export interface StudentQuiz {
+  id: number;
+  classRoomId: number;
+  classRoomStudent: ClassroomStudent;
+  lecturerId: number;
+  lecturer: Lecturer;
+  title: string;
+  duration: number;
+  status: number;
+  processing?: boolean;
 }

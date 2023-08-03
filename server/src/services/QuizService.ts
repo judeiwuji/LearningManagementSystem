@@ -9,6 +9,8 @@ import QuizDTO from '../models/DTOs/QuizDTO';
 import Lecturer from '../models/Lecturer';
 import LecturerDTO from '../models/DTOs/LecturerDTO';
 import { QuizStatus } from '../models/enums/QuizStatus';
+import ClassRoomStudent from '../models/ClassRoomStudent';
+import StudentService from './StudentService';
 
 export default class QuizService {
   private quizInclude() {
@@ -22,6 +24,7 @@ export default class QuizService {
   }
 
   private lecturerService = new LecturerService();
+  private studentService = new StudentService();
 
   async createQuiz(
     data: QuizCreationAttributes,
@@ -66,6 +69,45 @@ export default class QuizService {
       limit: pager.pageSize,
       offset: pager.startIndex,
       include: this.quizInclude(),
+      where: query,
+      attributes: QuizDTO,
+    });
+
+    return {
+      page,
+      results: rows,
+      totalPages: pager.totalPages(count),
+    };
+  }
+
+  async getStudentQuizzes(userId: number, page: number, search?: string) {
+    const student = await this.studentService.findStudentBy({ userId });
+
+    const pager = new Pagination(page);
+    const query: any = {
+      status: QuizStatus.ACTIVE,
+    };
+    if (search) {
+      query.title = {
+        [Op.like]: `%${search}%`,
+      };
+    }
+
+    const { rows, count } = await Quiz.findAndCountAll({
+      limit: pager.pageSize,
+      offset: pager.startIndex,
+      include: [
+        {
+          model: Lecturer,
+          attributes: LecturerDTO,
+          include: [{ model: User, attributes: UserDTO }],
+        },
+        {
+          model: ClassRoomStudent,
+          as: 'classRoomStudent',
+          where: { studentId: student.id },
+        },
+      ],
       where: query,
       attributes: QuizDTO,
     });
