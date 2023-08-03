@@ -1,6 +1,11 @@
 <app-dashboard-navbar [title]="'Classroom'"></app-dashboard-navbar>
 <div class="dashboard-main">
   <div class="container py-3">
+    <app-breadcrumb
+      [title]="classRoom?.title"
+      backLink="/classrooms"
+      class="mb-4"
+    ></app-breadcrumb>
     <!-- Content -->
     <div class="card app-card content-card">
       <div class="card-body">
@@ -13,7 +18,11 @@
             </div>
 
             <div>
-              <a href="" class="btn btn-full btn-sm me-2">Join Class</a>
+              <a
+                routerLink="/classrooms/{{ classRoomId }}/virtual"
+                class="btn btn-full btn-sm me-2"
+                >Join Class</a
+              >
               <a href="" class="btn btn-full btn-sm me-2">Quiz</a>
               <app-add-btn [title]="'Student'" (onAdd)="onAdd()"></app-add-btn>
             </div>

@@ -1,0 +1,17 @@
+.wrapper {
+  overflow: hidden;
+}
+
+.overlay-bottom {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  min-height: 2em;
+  padding: 0.35rem;
+  background-color: #0000007c;
+  color: var(--app-white);
+}
+
+.overlay-bottom svg {
+  color: var(--app-white) !important;
+}

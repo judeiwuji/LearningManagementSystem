@@ -11,6 +11,7 @@ import { StudentsComponent } from './pages/students/students.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { LecturersComponent } from './pages/lecturers/lecturers.component';
 import { ClassroomDetailComponent } from './pages/classroom-detail/classroom-detail.component';
+import { VirtualClassroomComponent } from './pages/virtual-classroom/virtual-classroom.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -34,6 +35,11 @@ const routes: Routes = [
   {
     path: 'classrooms/:id',
     component: ClassroomDetailComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'classrooms/:id/virtual',
+    component: VirtualClassroomComponent,
     canActivate: [authGuard],
   },
   {

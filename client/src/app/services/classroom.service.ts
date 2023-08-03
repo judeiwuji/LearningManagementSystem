@@ -25,6 +25,12 @@ export class ClassroomService {
     );
   }
 
+  getClassroom(id: number) {
+    return this.http.get<Classroom>(`${this.API_URL}/classrooms/${id}`, {
+      withCredentials: true,
+    });
+  }
+
   updateClassroom(request: ClassroomActionRequest, id: number) {
     return this.http.put<Classroom>(
       `${this.API_URL}/classrooms/${id}`,

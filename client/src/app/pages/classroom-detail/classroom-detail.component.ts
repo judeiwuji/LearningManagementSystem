@@ -3,9 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { ClassroomStudentFormComponent } from 'src/app/modals/classroom-student-form/classroom-student-form.component';
+import { Classroom } from 'src/app/models/ClassRoom';
 import { ClassroomStudent } from 'src/app/models/ClassroomStudent';
 import { Pagination } from 'src/app/models/Pagination';
 import { ClassroomStudentService } from 'src/app/services/classroom-student.service';
+import { ClassroomService } from 'src/app/services/classroom.service';
 
 @Component({
   selector: 'app-classroom-detail',
@@ -21,14 +23,21 @@ export class ClassroomDetailComponent {
   };
   searchTerm = '';
   classRoomId: number;
+  classRoom?: Classroom;
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
     private readonly toastr: ToastrService,
     private readonly modal: NgbModal,
-    private readonly classroomStudentService: ClassroomStudentService
+    private readonly classroomStudentService: ClassroomStudentService,
+    private readonly classroomService: ClassroomService
   ) {
     this.classRoomId = Number(this.activatedRoute.snapshot.params['id']);
+    this.classroomService.getClassroom(this.classRoomId).subscribe({
+      next: (response) => {
+        this.classRoom = response;
+      },
+    });
   }
 
   ngOnInit(): void {

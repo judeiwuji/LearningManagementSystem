@@ -50,6 +50,8 @@ import { ClassroomFormComponent } from './modals/classroom-form/classroom-form.c
 import { ClassroomDetailComponent } from './pages/classroom-detail/classroom-detail.component';
 import { ClassroomStudentFormComponent } from './modals/classroom-student-form/classroom-student-form.component';
 import { ActionBtnComponent } from './components/action-btn/action-btn.component';
+import { VirtualClassroomComponent } from './pages/virtual-classroom/virtual-classroom.component';
+import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +84,8 @@ import { ActionBtnComponent } from './components/action-btn/action-btn.component
     ClassroomDetailComponent,
     ClassroomStudentFormComponent,
     ActionBtnComponent,
+    VirtualClassroomComponent,
+    BreadcrumbComponent,
   ],
   imports: [
     BrowserModule,
