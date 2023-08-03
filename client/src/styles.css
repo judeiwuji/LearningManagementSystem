@@ -226,6 +226,12 @@ label {
 }
 /* avatar */
 
+/* app-table-container */
+.app-table-container {
+  max-width: 100%;
+}
+/* app-table-container */
+
 /* Queries */
 @media screen and (min-width: 767px) {
   .app-hero-shape--circle {
@@ -245,6 +251,10 @@ label {
 
   .dashboard-main {
     width: 100%;
+  }
+
+  .app-table-container {
+    overflow: auto;
   }
 }
 
