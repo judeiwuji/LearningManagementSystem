@@ -28,7 +28,9 @@ html {
 }
 
 .btn-full-lg:hover,
-.btn-full:hover {
+.btn-full:hover,
+.btn-full-lg:focus,
+.btn-full:focus {
   text-decoration: none;
   background-color: var(--app-primary-dark);
   color: var(--app-white);
@@ -39,6 +41,24 @@ html {
   text-decoration: none;
   background-color: var(--app-primary-light);
   color: var(--app-white);
+}
+
+.app-btn-primary {
+  background-color: var(--app-primary) !important;
+}
+
+.app-btn-secondary {
+  background-color: var(--app-secondary) !important;
+}
+
+.app-btn-light {
+  background-color: var(--app-grey) !important;
+  color: var(--app-black);
+}
+
+.app-btn-light:hover,
+.app-btn-light:focus {
+  color: var(--app-black);
 }
 /* Btns */
 

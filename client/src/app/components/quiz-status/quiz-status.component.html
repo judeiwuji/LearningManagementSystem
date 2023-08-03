@@ -1,0 +1,58 @@
+<div ngbDropdown placement="bottom-end">
+  <div [ngSwitch]="quiz.status">
+    <div *ngSwitchCase="QuizStatus.PENDING">
+      <button
+        class="btn btn-sm btn-full app-btn-light"
+        type="button"
+        ngbDropdownToggle
+      >
+        Pending
+        <fa-icon [icon]="faChevronDown" [hidden]="quiz.processing"></fa-icon>
+        <app-loading [loading]="quiz.processing"></app-loading>
+      </button>
+    </div>
+
+    <div *ngSwitchCase="QuizStatus.ACTIVE">
+      <button class="btn btn-sm btn-full" type="button" ngbDropdownToggle>
+        Active
+        <fa-icon [icon]="faChevronDown" [hidden]="quiz.processing"></fa-icon>
+        <app-loading [loading]="quiz.processing"></app-loading>
+      </button>
+    </div>
+
+    <div *ngSwitchCase="QuizStatus.CLOSE">
+      <button
+        class="btn btn-sm btn-full app-btn-secondary"
+        type="button"
+        ngbDropdownToggle
+      >
+        Close
+        <fa-icon [icon]="faChevronDown" [hidden]="quiz.processing"></fa-icon>
+        <app-loading [loading]="quiz.processing"></app-loading>
+      </button>
+    </div>
+  </div>
+
+  <ul ngbDropdownMenu>
+    <li>
+      <button ngbDropdownItem (click)="select(QuizStatus.ACTIVE)">
+        <div class="d-flex justify-content-between">
+          <span>Active</span>
+          <ng-container *ngIf="quiz.status === QuizStatus.ACTIVE">
+            <fa-icon [icon]="faCheck" class="text-primary"></fa-icon>
+          </ng-container>
+        </div>
+      </button>
+    </li>
+    <li>
+      <button ngbDropdownItem (click)="select(QuizStatus.CLOSE)">
+        <div class="d-flex justify-content-between">
+          <span>Close</span>
+          <ng-container *ngIf="quiz.status === QuizStatus.CLOSE">
+            <fa-icon [icon]="faCheck" class="text-primary"></fa-icon>
+          </ng-container>
+        </div>
+      </button>
+    </li>
+  </ul>
+</div>

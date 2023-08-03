@@ -1,2 +1,9 @@
-const QuizDTO = ['id', 'title'];
+const QuizDTO = [
+  'id',
+  'title',
+  'duration',
+  'status',
+  'classRoomId',
+  'lecturerId',
+];
 export default QuizDTO;

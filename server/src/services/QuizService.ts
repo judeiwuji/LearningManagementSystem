@@ -8,14 +8,15 @@ import LecturerService from './LecturerService';
 import QuizDTO from '../models/DTOs/QuizDTO';
 import Lecturer from '../models/Lecturer';
 import LecturerDTO from '../models/DTOs/LecturerDTO';
+import { QuizStatus } from '../models/enums/QuizStatus';
 
 export default class QuizService {
-  private quizInclude(query: any = {}) {
+  private quizInclude() {
     return [
       {
         model: Lecturer,
         attributes: LecturerDTO,
-        include: [{ model: User, attributes: UserDTO, where: query }],
+        include: [{ model: User, attributes: UserDTO }],
       },
     ];
   }
@@ -33,6 +34,8 @@ export default class QuizService {
       classRoomId,
       lecturerId: lecturer.id,
       title: data.title,
+      duration: data.duration,
+      status: QuizStatus.PENDING,
     });
     return quiz;
   }
@@ -62,7 +65,8 @@ export default class QuizService {
     const { rows, count } = await Quiz.findAndCountAll({
       limit: pager.pageSize,
       offset: pager.startIndex,
-      include: this.quizInclude(query),
+      include: this.quizInclude(),
+      where: query,
       attributes: QuizDTO,
     });
 
@@ -77,6 +81,8 @@ export default class QuizService {
     const quiz = await this.findBy({ id, classRoomId });
     await quiz.update({
       title: data.title,
+      duration: data.duration,
+      status: data.status,
     });
     return quiz.reload();
   }

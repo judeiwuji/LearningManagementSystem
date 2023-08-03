@@ -17,6 +17,8 @@ export interface QuizAttributes {
   lecturerId: number;
   lecturer: Lecturer;
   title: string;
+  duration: number;
+  status: number;
 }
 
 export interface QuizCreationAttributes
@@ -43,4 +45,10 @@ export default class Quiz extends Model<
 
   @Column({ type: DataType.STRING, allowNull: false })
   title!: string;
+
+  @Column({ type: DataType.INTEGER, defaultValue: 30 })
+  duration!: number;
+
+  @Column({ type: DataType.INTEGER, defaultValue: 0 })
+  status!: number;
 }

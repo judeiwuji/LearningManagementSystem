@@ -1,11 +1,12 @@
-<app-dashboard-navbar [title]="'Classroom'"></app-dashboard-navbar>
+<app-dashboard-navbar [title]="'Quizzes'"></app-dashboard-navbar>
 <div class="dashboard-main">
   <div class="container py-3">
-    <app-breadcrumb
-      [title]="classRoom?.title"
-      backLink="/classrooms"
-      class="mb-4"
-    ></app-breadcrumb>
+    <div class="mb-3">
+      <app-breadcrumb
+        backLink="/classrooms/{{ classRoomId }}"
+        [title]="'Classroom'"
+      ></app-breadcrumb>
+    </div>
     <!-- Content -->
     <div class="card app-card content-card">
       <div class="card-body">
@@ -13,23 +14,12 @@
           <div
             class="d-flex justify-content-between flex-wrap align-items-center"
           >
-            <div class="mb-3 mb-md-0">
+            <div class="mb-3 mb-sm-0">
               <app-search-form (onSearch)="onSearch($event)"></app-search-form>
             </div>
 
             <div>
-              <a
-                routerLink="/classrooms/{{ classRoomId }}/virtual"
-                class="btn btn-full btn-sm me-2"
-                >Join Class</a
-              >
-              <a
-                routerLink="/classrooms/{{ classRoomId }}/quizzes"
-                class="btn btn-full btn-sm me-2"
-              >
-                Quizzes
-              </a>
-              <app-add-btn [title]="'Student'" (onAdd)="onAdd()"></app-add-btn>
+              <app-add-btn [title]="'Quiz'" (onAdd)="onAdd()"></app-add-btn>
             </div>
           </div>
         </div>
@@ -40,9 +30,9 @@
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>Firstname</th>
-                  <th>Lastname</th>
-                  <th>Email</th>
+                  <th>Title</th>
+                  <th class="text-center">Status</th>
+                  <th>Duration (minutes)</th>
                   <th class="text-center">Action</th>
                 </tr>
               </thead>
@@ -50,26 +40,23 @@
                 <ng-container *ngFor="let item of pager.results; index as i">
                   <tr>
                     <td>{{ i + 1 }}.</td>
-                    <td class="text-capitalize">
-                      {{ item.student.user.firstname }}
-                    </td>
-                    <td class="text-capitalize">
-                      {{ item.student.user.lastname }}
-                    </td>
-                    <td>
-                      <a
-                        href="mailto:{{ item.student.user.email }}"
-                        class="link"
-                      >
-                        {{ item.student.user.email }}
-                      </a>
-                    </td>
+                    <td class="text-capitalize">{{ item.title }}</td>
                     <td class="text-center">
-                      <div class="d-flex justify-content-center">
-                        <app-action-btn
-                          [title]="'Remove'"
-                          (onAction)="onRemove(item)"
-                        ></app-action-btn>
+                      <app-quiz-status [quiz]="item"></app-quiz-status>
+                    </td>
+                    <td>{{ item.duration }}</td>
+                    <td class="text-center">
+                      <div
+                        class="d-flex align-items-center justify-content-center"
+                      >
+                        <a routerLink="" class="btn btn-sm btn-full me-2">
+                          View
+                        </a>
+                        <app-more-option-btn
+                          (onEdit)="onEdit(item)"
+                          (onDelete)="onDelete(item)"
+                          [loading]="item.processing"
+                        ></app-more-option-btn>
                       </div>
                     </td>
                   </tr>

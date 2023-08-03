@@ -52,6 +52,9 @@ import { ClassroomStudentFormComponent } from './modals/classroom-student-form/c
 import { ActionBtnComponent } from './components/action-btn/action-btn.component';
 import { VirtualClassroomComponent } from './pages/virtual-classroom/virtual-classroom.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { QuizzesComponent } from './pages/quizzes/quizzes.component';
+import { QuizFormComponent } from './modals/quiz-form/quiz-form.component';
+import { QuizStatusComponent } from './components/quiz-status/quiz-status.component';
 
 @NgModule({
   declarations: [
@@ -86,6 +89,9 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
     ActionBtnComponent,
     VirtualClassroomComponent,
     BreadcrumbComponent,
+    QuizzesComponent,
+    QuizFormComponent,
+    QuizStatusComponent,
   ],
   imports: [
     BrowserModule,
