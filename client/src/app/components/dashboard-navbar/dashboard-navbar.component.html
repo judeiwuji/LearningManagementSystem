@@ -109,6 +109,32 @@
         </li>
       </ng-container>
 
+      <ng-container *ngIf="profile && profile.role === Roles.STUDENT">
+        <li>
+          <a
+            routerLink="/student/classrooms"
+            [ngClass]="{ active: activeUrl === '/student/classrooms' }"
+          >
+            <div class="d-flex align-items-center">
+              <fa-icon [icon]="faWifi"></fa-icon>
+              <span class="ms-2">Classrooms</span>
+            </div>
+          </a>
+        </li>
+
+        <li>
+          <a
+            routerLink="/student/quizresults"
+            [ngClass]="{ active: activeUrl === '/student/quizresults' }"
+          >
+            <div class="d-flex align-items-center">
+              <fa-icon [icon]="faTasks"></fa-icon>
+              <span class="ms-2">Quiz Results</span>
+            </div>
+          </a>
+        </li>
+      </ng-container>
+
       <li>
         <a
           routerLink="/settings"

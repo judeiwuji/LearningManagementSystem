@@ -22,7 +22,6 @@ export default class RouteManager {
     this.app.use(this.baseAPI, [
       AppRoutes,
       AuthRoutes,
-      StudentRoutes,
       LecturerRoutes,
       ClassRoomRoutes,
       LectureRoutes,
@@ -31,6 +30,7 @@ export default class RouteManager {
       QuestionOptionRoutes,
       QuestionAnswerRoutes,
       DepartmentRoutes,
+      StudentRoutes,
       UserRoutes,
     ]);
   }

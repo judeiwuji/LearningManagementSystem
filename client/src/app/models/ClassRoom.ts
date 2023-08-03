@@ -12,3 +12,8 @@ export interface Classroom {
 export interface ClassroomActionRequest {
   title: string;
 }
+
+export interface StudentClassroom {
+  classRoom: Classroom;
+  processing?: boolean;
+}

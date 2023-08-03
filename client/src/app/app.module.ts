@@ -58,6 +58,7 @@ import { QuizStatusComponent } from './components/quiz-status/quiz-status.compon
 import { QuizDetailComponent } from './pages/quiz-detail/quiz-detail.component';
 import { QuizQuestionFormComponent } from './modals/quiz-question-form/quiz-question-form.component';
 import { QuizResultsComponent } from './modals/quiz-results/quiz-results.component';
+import { StudentClassroomsComponent } from './pages/student-classrooms/student-classrooms.component';
 
 @NgModule({
   declarations: [
@@ -98,6 +99,7 @@ import { QuizResultsComponent } from './modals/quiz-results/quiz-results.compone
     QuizDetailComponent,
     QuizQuestionFormComponent,
     QuizResultsComponent,
+    StudentClassroomsComponent,
   ],
   imports: [
     BrowserModule,

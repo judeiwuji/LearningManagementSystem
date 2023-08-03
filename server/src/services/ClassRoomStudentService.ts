@@ -94,7 +94,13 @@ export default class ClassRoomStudentService {
     };
   }
 
-  async getStudentClassrooms(userId: number, page: number, search?: string) {
+  async getStudentClassrooms(
+    userId: number,
+    page: number,
+    search?: string,
+    filters = {}
+  ) {
+    console.log("Student: " + userId)
     const student = await this.studentService.findStudentBy({ userId });
     const pager = new Pagination(page);
     const query: any = {};
@@ -120,6 +126,7 @@ export default class ClassRoomStudentService {
       include: [
         {
           model: ClassRoom,
+          where: filters,
           include: [
             {
               model: Lecturer,

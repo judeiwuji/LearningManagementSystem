@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Classroom, ClassroomActionRequest } from '../models/ClassRoom';
+import { Classroom, ClassroomActionRequest, StudentClassroom } from '../models/ClassRoom';
 import { Pagination } from '../models/Pagination';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -45,5 +45,16 @@ export class ClassroomService {
     return this.http.delete<void>(`${this.API_URL}/classrooms/${id}`, {
       withCredentials: true,
     });
+  }
+
+  getStudentClassrooms(page = 1, search = '', filters: any = {}) {
+    return this.http.get<Pagination<StudentClassroom>>(
+      `${
+        this.API_URL
+      }/students/classrooms?page=${page}&search=${search}&filters=${JSON.stringify(
+        filters
+      )}`,
+      { withCredentials: true }
+    );
   }
 }

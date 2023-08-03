@@ -43,4 +43,9 @@ ClassRoomRoutes.delete(
   ensureAuth,
   ClassRoomController.deleteClassRoom
 );
+ClassRoomRoutes.get(
+  '/students/classrooms',
+  ensureAuth,
+  ClassRoomController.getStudentClassRooms
+);
 export default ClassRoomRoutes;

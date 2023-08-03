@@ -15,6 +15,7 @@ import {
   ClassRoomUpdateSchema,
 } from '../validators/schemas/ClassRoomSchema';
 import ClassRoomStudentService from '../services/ClassRoomStudentService';
+import parseData from '../utils/parseData';
 
 const classRoomService = new ClassRoomService();
 const classRoomStudentService = new ClassRoomStudentService();
@@ -94,11 +95,13 @@ export default class ClassRoomController {
     const page = Number(req.query.page) || 1;
     const search = req.query.search as string;
     const user = req.user;
+    const filters: any = parseData(req.query.filters as string) || {};
     try {
       const data = await classRoomStudentService.getStudentClassrooms(
         user?.id,
         page,
-        search
+        search,
+        filters
       );
       res.send(data);
     } catch (error) {
