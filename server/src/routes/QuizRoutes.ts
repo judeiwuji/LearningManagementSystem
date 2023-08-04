@@ -36,7 +36,7 @@ QuizRoutes.get(
 
 QuizRoutes.post('/quizzes/:qid/submit', QuizController.submitQuiz);
 QuizRoutes.get(
-  '/quizzes/:qid/students/results',
+  '/quizzes/:qid/students/result',
   QuizController.getStudentQuizResult
 );
 QuizRoutes.get('/quizzes/:qid/results', QuizController.getQuizResults);

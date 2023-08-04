@@ -8,7 +8,6 @@ import Lecturer from '../Lecturer';
 import Student from '../Student';
 import ClassRoom from '../ClassRoom';
 import ClassRoomStudent from '../ClassRoomStudent';
-import Lecture from '../Lecture';
 import Quiz from '../Quiz';
 import QuizQuestion from '../QuizQuestion';
 import QuestionOption from '../QuestionOption';
@@ -39,7 +38,6 @@ const DB = new Sequelize({
     Student,
     ClassRoom,
     ClassRoomStudent,
-    Lecture,
     Quiz,
     QuizResult,
     QuizQuestion,

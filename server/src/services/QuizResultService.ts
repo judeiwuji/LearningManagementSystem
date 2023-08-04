@@ -17,6 +17,7 @@ import ClassRoomDTO from '../models/DTOs/ClassRoomDTO';
 import Lecturer from '../models/Lecturer';
 import LecturerDTO from '../models/DTOs/LecturerDTO';
 import NotFoundError from '../models/errors/NotFoundError';
+import QuizQuestion from '../models/QuizQuestion';
 
 export default class QuizResultService {
   private studentService = new StudentService();
@@ -35,7 +36,12 @@ export default class QuizResultService {
     const score = await QuestionAnswer.sum('score', {
       where: { quizId, studentId: student.id },
     });
-    return QuizResult.create({ quizId, score, studentId: student.id });
+    return QuizResult.create({
+      quizId,
+      score,
+      studentId: student.id,
+      questionCount: await QuizQuestion.count({ where: { quizId } }),
+    });
   }
 
   async getQuizResults(quizId: number, page: number, search = '') {
@@ -56,7 +62,7 @@ export default class QuizResultService {
         },
       ];
     }
-    const { rows, count } = await QuestionAnswer.findAndCountAll({
+    const { rows, count } = await QuizResult.findAndCountAll({
       attributes: QuizResultDTO,
       include: [
         {

@@ -103,7 +103,7 @@ export default class QuizController {
       });
       res.send(data);
     } catch (error) {
-      httpErrorHandler(error, res);
+      res.send(null);
     }
   }
 

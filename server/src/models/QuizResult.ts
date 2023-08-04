@@ -17,6 +17,7 @@ export interface QuizResultAttributes {
   quizId: number;
   quiz: Quiz;
   score: number;
+  questionCount: number;
 }
 
 export interface QuizResultCreationAttributes
@@ -41,4 +42,7 @@ export default class QuizResult extends Model<
 
   @Column({ type: DataType.INTEGER, allowNull: false })
   score!: number;
+
+  @Column({ type: DataType.INTEGER, allowNull: false })
+  questionCount!: number;
 }

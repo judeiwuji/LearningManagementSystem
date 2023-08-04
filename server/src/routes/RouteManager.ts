@@ -4,7 +4,6 @@ import AuthRoutes from './AuthRoutes';
 import StudentRoutes from './StudentRoutes';
 import LecturerRoutes from './LecturerRoutes';
 import ClassRoomRoutes from './ClassRoomRoutes';
-import LectureRoutes from './LectureRoutes';
 import QuizRoutes from './QuizRoutes';
 import QuizQuestionRoutes from './QuizQuestionRoutes';
 import QuestionOptionRoutes from './QuestionOptionRoutes';
@@ -24,7 +23,6 @@ export default class RouteManager {
       AuthRoutes,
       LecturerRoutes,
       ClassRoomRoutes,
-      LectureRoutes,
       QuizRoutes,
       QuizQuestionRoutes,
       QuestionOptionRoutes,

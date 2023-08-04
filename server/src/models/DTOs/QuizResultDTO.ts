@@ -1,2 +1,2 @@
-const QuizResultDTO = ['id', 'score'];
+const QuizResultDTO = ['id', 'score', 'questionCount'];
 export default QuizResultDTO;

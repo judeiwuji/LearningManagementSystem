@@ -32,7 +32,7 @@ export default class AuthController {
       });
 
       const user = await authService.getUserFromSession(session);
-      res.send({ status: 'OK', role: Roles[user.role], session });
+      res.send({ status: 'OK', role: user.role });
     } catch (error: any) {
       httpErrorHandler(error, res);
     }

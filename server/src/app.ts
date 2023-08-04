@@ -1,5 +1,5 @@
 import path from 'path';
-import express, { Application, Request, Response } from 'express';
+import express, { Application } from 'express';
 import morgan from 'morgan';
 import * as dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
@@ -7,7 +7,7 @@ import cors from 'cors';
 import RouteManager from './routes/RouteManager';
 import DB from './models/engine/DBStorage';
 import deserializeUser from './middleware/deserializeUser';
-import BcryptUtil from './utils/BcryptUtil';
+import AppService from './services/AppService';
 dotenv.config();
 
 class App {
@@ -39,7 +39,8 @@ class App {
   }
 
   settings() {
-    BcryptUtil.hashPassword('admin').then((hash) => console.log(hash));
+    const appService = new AppService();
+    appService.install().catch(() => null);
     DB.sync({ alter: false });
     this.app.listen(this.port, () =>
       console.log(`Server is running on PORT ::${this.port}`)
