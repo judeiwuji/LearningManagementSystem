@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
-import { QuizQuestion, QuizQuestionActionRequest } from '../models/Question';
+import {
+  QuestionAnswerActionRequest,
+  QuizQuestion,
+  QuizQuestionActionRequest,
+} from '../models/Question';
 import { Pagination } from '../models/Pagination';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -46,6 +50,27 @@ export class QuizQuestionService {
   deleteQuestion(quizId: number, id: number) {
     return this.http.delete<void>(
       `${this.API_URL}/quizzes/${quizId}/questions/${id}`,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
+  getQuizQuestions(quizId: number) {
+    return this.http.get<QuizQuestion[]>(
+      `${this.API_URL}/quizzes/${quizId}/questions/all`,
+      { withCredentials: true }
+    );
+  }
+
+  answerQuizQuestion(
+    quizId: number,
+    questionId: number,
+    request: QuestionAnswerActionRequest
+  ) {
+    return this.http.post<boolean>(
+      `${this.API_URL}/quizzes/${quizId}/questions/${questionId}/answers`,
+      request,
       {
         withCredentials: true,
       }

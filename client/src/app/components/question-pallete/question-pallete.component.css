@@ -1,0 +1,11 @@
+.circle-label-sm.answered,
+.circle-label.answered {
+  background-color: var(--app-green);
+  color: var(--app-white);
+}
+
+.circle-label-sm.not-answered,
+.circle-label.not-answered {
+  background-color: var(--app-secondary);
+  color: var(--app-white);
+}

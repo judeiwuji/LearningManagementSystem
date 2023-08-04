@@ -7,6 +7,7 @@
   --app-grey-dark: #c0c0c0;
   --app-black: #000000;
   --app-secondary: #f73b3b;
+  --app-green: #067c59;
 }
 html {
   scroll-behavior: smooth;
@@ -130,14 +131,44 @@ html {
 .app-card .card-footer {
   background-color: var(--app-white);
   border: 0;
+  border-radius: 15px;
 }
 /* App-Card */
 
 /* Label */
-label {
+label:not(.form-check-label) {
   color: var(--app-grey-dark);
   font-size: 0.85rem;
 }
+
+.circle-label-sm,
+.circle-label {
+  background-color: var(--app-grey);
+  color: var(--app-black);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.circle-label {
+  width: 2.5em;
+  height: 2.5em;
+}
+
+.circle-label-sm {
+  width: 1em;
+  height: 1em;
+}
+
+.circle-label-sm.active,
+.circle-label.active {
+  background-color: var(--app-primary) !important;
+  color: var(--app-white) !important;
+}
+
 /* Label */
 
 /* Wrapper */
@@ -255,6 +286,21 @@ label {
   max-width: 100%;
 }
 /* app-table-container */
+
+/* app-rounded */
+.app-rounded {
+  border-radius: 20px;
+}
+/* app-rounded */
+
+.logo {
+  width: 1.5em;
+  height: 1.5em;
+}
+
+.logo-pane {
+  margin-bottom: 3rem;
+}
 
 /* Queries */
 @media screen and (min-width: 767px) {

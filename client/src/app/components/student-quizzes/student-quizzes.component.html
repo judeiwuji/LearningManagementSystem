@@ -32,12 +32,15 @@
                   <td class="text-capitalize" style="width: 20em">
                     {{ item.title }}
                   </td>
-                  <td class="text-capitalize" style="width: 10em">
+                  <td class="text-capitalize" style="width: 15em">
                     {{ item.lecturer.user.firstname }}
                     {{ item.lecturer.user.lastname }}
                   </td>
                   <td class="text-center">
-                    <app-action-btn [title]="'Take Quiz'"></app-action-btn>
+                    <app-action-btn
+                      [title]="'Take Quiz'"
+                      (onAction)="onTakeQuiz(item)"
+                    ></app-action-btn>
                   </td>
                 </tr>
               </ng-container>

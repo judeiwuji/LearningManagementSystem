@@ -46,6 +46,17 @@ export default class QuizQuestionController {
     }
   }
 
+  static async getQuizQuestions(req: IRequest, res: Response) {
+    const qid = Number(req.params.qid);
+    try {
+      const user = req.user;
+      const data = await questionService.getQuizQuestions(qid, user?.id);
+      res.send(data);
+    } catch (error) {
+      httpErrorHandler(error, res);
+    }
+  }
+
   static async updateQuestion(req: Request, res: Response) {
     const id = Number(req.params.id);
     const qid = Number(req.params.qid);

@@ -60,8 +60,8 @@ export class StudentQuizzesComponent {
     this.loadData();
   }
 
-  onTakeQuiz() {
+  onTakeQuiz(quiz: StudentQuiz) {
     // check if user have taken the quiz
-    this.router.navigate(['/quiz']);
+    this.router.navigateByUrl(`/quiz/intro/${quiz.classRoomId}/${quiz.id}`);
   }
 }

@@ -1,0 +1,40 @@
+<div class="card app-card">
+  <div class="card-body">
+    <div class="d-flex justify-content-start flex-wrap">
+      <ng-container *ngFor="let question of questions; index as i">
+        <span class="mx-1 mb-3">
+          <span
+            class="circle-label"
+            [ngClass]="{
+              active: i === currentIndex,
+              answered: !!question.answer,
+              'not-answered': !question.answer
+            }"
+            (click)="select(i)"
+            role="button"
+          >
+            {{ i + 1 }}
+          </span>
+        </span>
+      </ng-container>
+    </div>
+  </div>
+  <div class="card-footer">
+    <div class="d-flex align-items-center">
+      <div class="d-flex align-items-center me-2">
+        <span class="circle-label-sm answered me-2"></span>
+        <span class="small">Answered</span>
+      </div>
+
+      <div class="d-flex align-items-center me-2">
+        <span class="circle-label-sm not-answered me-2"></span>
+        <span class="small">Not Answered</span>
+      </div>
+
+      <div class="d-flex align-items-center">
+        <span class="circle-label-sm active me-2"></span>
+        <span class="small">Active</span>
+      </div>
+    </div>
+  </div>
+</div>

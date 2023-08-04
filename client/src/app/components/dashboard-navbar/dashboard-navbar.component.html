@@ -14,20 +14,7 @@
       <ul class="navbar-nav ml-auto">
         <ng-container *ngIf="profile">
           <li class="nav-item">
-            <a
-              class="nav-link"
-              href="javascript:void(0)"
-              [ngbPopover]="popContent"
-              placement="bottom-end"
-            >
-              <div class="d-flex align-items-center">
-                <span class="me-2 small fw-bold">
-                  Howdy
-                  <span class="text-capitalize">{{ profile.firstname }}</span>
-                </span>
-                <img [src]="profile.avatar" alt="Avatar" class="avatar" />
-              </div>
-            </a>
+            <app-profile-popover [profile]="profile"></app-profile-popover>
           </li>
         </ng-container>
       </ul>
@@ -155,17 +142,3 @@
   [ngClass]="{ open: isSidebarOpen }"
   (click)="toggleSidebar()"
 ></div>
-
-<ng-template #popContent>
-  <div class="d-flex align-items-center mb-2">
-    <img [src]="profile?.avatar" alt="Avatar" class="avatar me-2" />
-    <span>{{ profile?.firstname }}</span>
-  </div>
-
-  <button class="btn text-danger px-0" (click)="logout()">
-    <div class="d-flex align-items-center">
-      <fa-icon [icon]="faPowerOff" class="me-2"></fa-icon>
-      <span>Logout</span>
-    </div>
-  </button>
-</ng-template>

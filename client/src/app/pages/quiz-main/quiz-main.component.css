@@ -1,0 +1,13 @@
+.option-card .card-body {
+  padding: 0.5rem;
+}
+
+.option-card .card-body .form-check,
+.option-card .card-body .form-check-label {
+  width: 100%;
+  padding-left: 0;
+}
+
+.quiz-card {
+  user-select: none;
+}

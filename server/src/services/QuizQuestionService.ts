@@ -17,6 +17,8 @@ import AppError from '../models/errors/AppError';
 import QuizQuestionDTO from '../models/DTOs/QuizQuestionDTO';
 import QuestionOptionDTO from '../models/DTOs/QuestionOptionDTO';
 import Lecturer from '../models/Lecturer';
+import StudentService from './StudentService';
+import QuestionAnswer from '../models/QuestionAnswer';
 
 export default class QuizQuestionService {
   private questionInclude() {
@@ -29,6 +31,7 @@ export default class QuizQuestionService {
   }
 
   private lecturerService = new LecturerService();
+  private studentService = new StudentService();
 
   async createQuestion(data: QuizQuestionCreationAttributes, quizId: number) {
     const transaction = await DB.transaction();
@@ -112,6 +115,31 @@ export default class QuizQuestionService {
       results: rows,
       totalPages: pager.totalPages(count),
     };
+  }
+
+  async getQuizQuestions(quizId: number, userId: number) {
+    const student = await this.studentService.findStudentBy({ userId });
+
+    return QuizQuestion.findAll({
+      limit: 60,
+      offset: 0,
+      include: [
+        {
+          model: QuestionOption,
+          attributes: QuestionOptionDTO,
+        },
+      ],
+      attributes: [
+        ...QuizQuestionDTO,
+        [
+          DB.literal(
+            `(SELECT answer FROM QuestionAnswers WHERE studentId=${student.id} AND questionId=QuizQuestion.id)`
+          ),
+          'answer',
+        ],
+      ],
+      where: { quizId },
+    });
   }
 
   async updateQuestion(

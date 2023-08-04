@@ -17,3 +17,7 @@ export interface QuizQuestionActionRequest {
   answer?: string;
   options?: string[];
 }
+
+export interface QuestionAnswerActionRequest {
+  answer?: string;
+}

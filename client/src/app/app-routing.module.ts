@@ -16,6 +16,8 @@ import { QuizzesComponent } from './pages/quizzes/quizzes.component';
 import { QuizDetailComponent } from './pages/quiz-detail/quiz-detail.component';
 import { StudentClassroomsComponent } from './pages/student-classrooms/student-classrooms.component';
 import { StudentQuizResultsComponent } from './pages/student-quiz-results/student-quiz-results.component';
+import { QuizIntroComponent } from './pages/quiz-intro/quiz-intro.component';
+import { QuizMainComponent } from './pages/quiz-main/quiz-main.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -74,6 +76,16 @@ const routes: Routes = [
   {
     path: 'lecturers',
     component: LecturersComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'quiz/intro/:cid/:id',
+    component: QuizIntroComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'quiz/start/:cid/:id',
+    component: QuizMainComponent,
     canActivate: [authGuard],
   },
   {

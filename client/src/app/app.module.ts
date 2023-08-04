@@ -16,7 +16,7 @@ import { MainNavbarComponent } from './components/main-navbar/main-navbar.compon
 import { MainFooterComponent } from './components/main-footer/main-footer.component';
 import { ForgottenPasswordComponent } from './pages/forgotten-password/forgotten-password.component';
 import { ToastrModule } from 'ngx-toastr';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardNavbarComponent } from './components/dashboard-navbar/dashboard-navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CookieService } from 'ngx-cookie-service';
@@ -61,6 +61,13 @@ import { QuizResultsComponent } from './modals/quiz-results/quiz-results.compone
 import { StudentClassroomsComponent } from './pages/student-classrooms/student-classrooms.component';
 import { StudentQuizResultsComponent } from './pages/student-quiz-results/student-quiz-results.component';
 import { StudentQuizzesComponent } from './components/student-quizzes/student-quizzes.component';
+import { QuizIntroComponent } from './pages/quiz-intro/quiz-intro.component';
+import { QuizMainComponent } from './pages/quiz-main/quiz-main.component';
+import { QuestionPalleteComponent } from './components/question-pallete/question-pallete.component';
+import { TimerComponent } from './components/timer/timer.component';
+import { PadZero } from './pipes/padZero';
+import { LetterLabel } from './pipes/letterLabel';
+import { ProfilePopoverComponent } from './components/profile-popover/profile-popover.component';
 
 @NgModule({
   declarations: [
@@ -104,11 +111,19 @@ import { StudentQuizzesComponent } from './components/student-quizzes/student-qu
     StudentClassroomsComponent,
     StudentQuizResultsComponent,
     StudentQuizzesComponent,
+    QuizIntroComponent,
+    QuizMainComponent,
+    QuestionPalleteComponent,
+    TimerComponent,
+    PadZero,
+    LetterLabel,
+    ProfilePopoverComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    FormsModule,
     ReactiveFormsModule,
     NgbModule,
     FontAwesomeModule,

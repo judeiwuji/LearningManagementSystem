@@ -1,0 +1,20 @@
+<div class="wrapper d-flex justify-content-center align-items-center">
+  <div class="text-center">
+    <h1 class="title-text mb-2">Curriculum Assessment Quiz</h1>
+    <ng-container *ngIf="quiz">
+      <p class="subtitle-text fw-bold text-muted mb-4">{{ quiz.title }}</p>
+      <div class="d-flex justify-content-center py-3">
+        <a routerLink="/dashboard" class="btn btn-full app-btn-light me-2">
+          Go Back
+        </a>
+        <a
+          routerLink="/quiz/start/{{ quiz.classRoomId }}/{{ quiz.id }}"
+          class="btn btn-full"
+        >
+          Start Quiz
+        </a>
+      </div>
+    </ng-container>
+    <app-loading [loading]="loading"></app-loading>
+  </div>
+</div>

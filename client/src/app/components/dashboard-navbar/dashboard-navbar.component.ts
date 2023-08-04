@@ -65,20 +65,4 @@ export class DashboardNavbarComponent {
   toggleSidebar() {
     this.isSidebarOpen = !this.isSidebarOpen;
   }
-
-  logout() {
-    this.toastr.info('Please wait', '', { timeOut: 0 });
-
-    this.authService.logout().subscribe({
-      next: () => {
-        this.toastr.clear();
-        // this.authService.clearSession();
-        this.router.navigateByUrl('/login');
-      },
-      error: (err) => {
-        this.toastr.clear();
-        this.toastr.warning(err.error.error);
-      },
-    });
-  }
 }

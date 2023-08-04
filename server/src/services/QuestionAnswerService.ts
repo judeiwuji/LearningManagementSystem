@@ -36,7 +36,14 @@ export default class QuestionAnswerService {
       true
     );
     const student = await this.studentService.findStudentBy({ userId });
+    const studentAnswer = await QuestionAnswer.findOne({
+      where: { studentId: student.id, questionId },
+    });
 
+    if (studentAnswer) {
+      await studentAnswer.update({ answer: data.answer });
+      return studentAnswer.reload();
+    }
     const answer = await QuestionAnswer.create({
       answer: data.answer,
       quizId: quiz.id,

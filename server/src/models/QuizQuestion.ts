@@ -6,10 +6,12 @@ import {
   HasMany,
   Model,
   Table,
+  HasOne,
 } from 'sequelize-typescript';
 import Quiz from './Quiz';
 import { Optional } from 'sequelize';
 import QuestionOption from './QuestionOption';
+import QuestionAnswer from './QuestionAnswer';
 
 export interface QuizQuestionAttributes {
   id: number;
@@ -43,4 +45,7 @@ export default class QuizQuestion extends Model<
 
   @HasMany(() => QuestionOption)
   options!: QuestionOption[];
+
+  @HasOne(() => QuestionAnswer, { foreignKey: 'questionId' })
+  studentAnswer!: QuestionAnswer;
 }

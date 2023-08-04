@@ -4,6 +4,11 @@ import QuizQuestionController from '../controllers/QuizQuestionController';
 
 const QuizQuestionRoutes = Router();
 QuizQuestionRoutes.get(
+  '/quizzes/:qid/questions/all',
+  ensureAuth,
+  QuizQuestionController.getQuizQuestions
+);
+QuizQuestionRoutes.get(
   '/quizzes/:qid/questions/:id',
   ensureAuth,
   QuizQuestionController.getQuestion

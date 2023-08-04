@@ -1,0 +1,124 @@
+<ng-container *ngIf="loading">
+  <div class="wrapper d-flex justify-content-center align-items-center">
+    <div class="text-center">
+      <app-loading [loading]="true"></app-loading>
+      <p class="text-muted">Loading questions, please wait...</p>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="!loading">
+  <div class="container py-3 py-md-5">
+    <div class="card app-card quiz-card">
+      <div class="card-body">
+        <div class="card-header">
+          <div class="d-flex justify-content-between">
+            <h5 class="card-title mb-0">{{ quiz.title }}</h5>
+
+            <app-timer
+              (onTimeOver)="onTimeOver()"
+              [duration]="quiz.duration"
+            ></app-timer>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <div class="row">
+            <div
+              class="col-12 col-sm-10 col-lg-6 mx-sm-auto mx-lg-0 mb-4 mb-lg-0"
+            >
+              <div class="d-flex mb-2">
+                <app-loading
+                  [loading]="questions[index].processing"
+                  class="me-1"
+                ></app-loading>
+                <small class="text-muted">
+                  Question &laquo; {{ index + 1 }} of
+                  {{ questions.length }} &raquo;
+                </small>
+              </div>
+
+              <div class="card app-card">
+                <div class="card-body">
+                  <p class="mb-3">{{ questions[index].question }}</p>
+
+                  <!-- Options -->
+                  <ng-container
+                    *ngFor="let option of questions[index].options; index as i"
+                  >
+                    <div class="d-flex align-items-center mb-3">
+                      <span>
+                        <span
+                          class="me-2 circle-label"
+                          [ngClass]="{
+                            active: option.option === questions[index].answer
+                          }"
+                        >
+                          {{ i | letterLabel }}
+                        </span>
+                      </span>
+                      <div class="card option-card w-100">
+                        <div class="card-body">
+                          <div class="form-check">
+                            <input
+                              class="form-check-input d-none"
+                              type="radio"
+                              id="option{{ i }}"
+                              [value]="option.option"
+                              [(ngModel)]="questions[index].answer"
+                              (change)="onSelect(questions[index])"
+                            />
+                            <label
+                              class="form-check-label ml-0"
+                              for="option{{ i }}"
+                            >
+                              {{ option.option }}
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-container>
+                  <!-- Options -->
+                </div>
+                <div class="card-footer">
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <button
+                        class="btn btn-full btn-sm me-2"
+                        (click)="previous()"
+                        [disabled]="index === 0"
+                      >
+                        Previous
+                      </button>
+                      <button
+                        class="btn btn-full btn-sm"
+                        (click)="next()"
+                        [disabled]="index === questions.length - 1"
+                      >
+                        Next
+                      </button>
+                    </div>
+                    <div>
+                      <button class="btn btn-full btn-sm">Submit</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-10 col-lg-6 mx-sm-auto mx-lg-0">
+              <div class="mb-2">
+                <small class="text-muted">Question Palette</small>
+              </div>
+              <app-question-pallete
+                [questions]="questions"
+                [currentIndex]="index"
+                (onSelect)="goto($event)"
+              ></app-question-pallete>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
