@@ -47,6 +47,7 @@ export class DashboardNavbarComponent {
   activeUrl: string;
   profile?: User;
   Roles = Roles;
+  currentUserRole: Roles;
 
   constructor(
     private readonly router: Router,
@@ -54,6 +55,7 @@ export class DashboardNavbarComponent {
     private readonly toastr: ToastrService
   ) {
     this.activeUrl = this.router.url;
+    this.currentUserRole = authService.role;
   }
 
   ngOnInit(): void {

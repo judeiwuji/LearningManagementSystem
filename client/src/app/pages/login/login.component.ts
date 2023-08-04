@@ -48,9 +48,9 @@ export class LoginComponent implements OnInit {
 
       const sub = this.authService.login(request).subscribe({
         next: (response) => {
-          console.log(response);
           sub.unsubscribe();
           this.processing = false;
+          this.authService.role = response.role;
           this.router.navigate(['/dashboard']);
         },
         error: (err) => {

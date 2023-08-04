@@ -11,3 +11,8 @@
 .quiz-card {
   user-select: none;
 }
+
+.quiz-score {
+  font-size: 5rem;
+  font-weight: 700;
+}

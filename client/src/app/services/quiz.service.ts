@@ -37,6 +37,13 @@ export class QuizService {
     );
   }
 
+  submitQuiz(quizId: number) {
+    return this.http.post<StudentQuizResult>(
+      `${this.API_URL}/quizzes/${quizId}/submit`,
+      { withCredentials: true }
+    );
+  }
+
   getQuizResults(id: number, page = 1, search = '') {
     return this.http.get<Pagination<QuizResult>>(
       `${this.API_URL}/quizzes/${id}/results?page=${page}&search=${search}`,
@@ -49,6 +56,15 @@ export class QuizService {
   getStudentQuizResults(page = 1, search = '') {
     return this.http.get<Pagination<StudentQuizResult>>(
       `${this.API_URL}/student/quizzes/results?page=${page}&search=${search}`,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
+  getStudentQuizResult(quizId: number) {
+    return this.http.get<StudentQuizResult>(
+      `${this.API_URL}/quizzes/${quizId}/students/result`,
       {
         withCredentials: true,
       }

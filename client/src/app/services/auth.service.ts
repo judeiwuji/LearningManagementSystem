@@ -12,6 +12,7 @@ import { tap } from 'rxjs';
 export class AuthService {
   private API_URL = `${environment.apiURL}`;
   private AUTH_SESSION = environment.authSession;
+  private AUTH_ROLE_KEY = `__authRole`;
 
   constructor(
     private http: HttpClient,
@@ -52,5 +53,14 @@ export class AuthService {
 
   clearSession() {
     this.cookieService.delete(this.AUTH_SESSION);
+    this.cookieService.delete(this.AUTH_ROLE_KEY);
+  }
+
+  set role(role: number) {
+    this.cookieService.set(this.AUTH_ROLE_KEY, `${role}`);
+  }
+
+  get role() {
+    return Number(this.cookieService.get(this.AUTH_ROLE_KEY));
   }
 }

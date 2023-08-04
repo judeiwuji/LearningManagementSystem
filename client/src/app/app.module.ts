@@ -68,6 +68,7 @@ import { TimerComponent } from './components/timer/timer.component';
 import { PadZero } from './pipes/padZero';
 import { LetterLabel } from './pipes/letterLabel';
 import { ProfilePopoverComponent } from './components/profile-popover/profile-popover.component';
+import { MessageBoxComponent } from './modals/message-box/message-box.component';
 
 @NgModule({
   declarations: [
@@ -118,6 +119,7 @@ import { ProfilePopoverComponent } from './components/profile-popover/profile-po
     PadZero,
     LetterLabel,
     ProfilePopoverComponent,
+    MessageBoxComponent,
   ],
   imports: [
     BrowserModule,

@@ -44,7 +44,7 @@
         </a>
       </li>
 
-      <ng-container *ngIf="profile && profile.role === Roles.ADMIN">
+      <ng-container *ngIf="currentUserRole === Roles.ADMIN">
         <li>
           <a
             routerLink="/students"
@@ -82,7 +82,7 @@
         </li>
       </ng-container>
 
-      <ng-container *ngIf="profile && profile.role === Roles.LECTURER">
+      <ng-container *ngIf="currentUserRole === Roles.LECTURER">
         <li>
           <a
             routerLink="/classrooms"
@@ -96,7 +96,7 @@
         </li>
       </ng-container>
 
-      <ng-container *ngIf="profile && profile.role === Roles.STUDENT">
+      <ng-container *ngIf="currentUserRole === Roles.STUDENT">
         <li>
           <a
             routerLink="/student/classrooms"

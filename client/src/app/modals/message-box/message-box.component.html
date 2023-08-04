@@ -1,0 +1,18 @@
+<div class="modal-header">
+  <button class="btn-close" (click)="cancel()"></button>
+</div>
+
+<div class="modal-body">
+  <div class="text-center">
+    <h5 class="fw-bold">
+      {{ message }}
+    </h5>
+  </div>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-full app-btn-light btn-sm" (click)="cancel()">
+    Cancel
+  </button>
+  <button class="btn btn-full btn-sm" (click)="continue()">Continue</button>
+</div>

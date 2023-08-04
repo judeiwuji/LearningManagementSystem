@@ -11,7 +11,9 @@
     </div>
 
     <!-- Student Active Quizzes -->
-    <app-student-quizzes></app-student-quizzes>
+    <ng-container *ngIf="currentUserRole === Roles.STUDENT">
+      <app-student-quizzes></app-student-quizzes>
+    </ng-container>
     <!-- Student Active Quizzes -->
   </div>
   <app-main-footer></app-main-footer>

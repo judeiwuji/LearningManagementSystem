@@ -75,7 +75,9 @@ export class VirtualClassroomComponent implements OnInit {
       if (this.closeTimeout) return;
 
       this.closeTimeout = setTimeout(() => {
-        this.router.navigate([`/classrooms/${this.classRoom.id}`]);
+        if (this.profile.lecturer)
+          this.router.navigate([`/classrooms/${this.classRoom.id}`]);
+        else this.router.navigate([`/student/classrooms`]);
       }, 1000);
     });
   }

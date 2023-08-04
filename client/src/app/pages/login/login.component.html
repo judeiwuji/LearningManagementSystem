@@ -2,7 +2,11 @@
   <div class="container">
     <div class="row">
       <div class="col-12 col-sm-10 col-md-8 col-lg-5 col-xl-4 mx-auto">
-        <h1 class="title-text mb-3">Welcome back</h1>
+        <div class="d-flex align-items-center mb-3">
+          <h6 class="mb-0">Login</h6>
+          <span class="mx-1">|</span>
+          <a routerLink="/" class="link">Home</a>
+        </div>
         <div class="card app-card login-card mb-3">
           <div class="card-body">
             <form [formGroup]="loginForm" (ngSubmit)="login()">

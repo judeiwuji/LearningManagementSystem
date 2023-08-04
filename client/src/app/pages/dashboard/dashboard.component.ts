@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AppStats } from 'src/app/models/AppStats';
+import { Roles } from 'src/app/models/enums/Roles';
 import { AppService } from 'src/app/services/app.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,7 +11,14 @@ import { AppService } from 'src/app/services/app.service';
 })
 export class DashboardComponent implements OnInit {
   stats: AppStats[] = [];
-  constructor(private readonly appService: AppService) {}
+  currentUserRole!: Roles;
+  Roles = Roles;
+  constructor(
+    private readonly appService: AppService,
+    private readonly authService: AuthService
+  ) {
+    this.currentUserRole = authService.role;
+  }
 
   ngOnInit(): void {
     this.getStats();

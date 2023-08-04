@@ -1,3 +1,5 @@
+import { Roles } from './enums/Roles';
+
 export interface LoginRequest {
   email: string;
   password: string;
@@ -5,7 +7,7 @@ export interface LoginRequest {
 
 export interface LoginResponse {
   status: string;
-  role: string;
+  role: Roles;
 }
 
 export interface LogoutResponse {
