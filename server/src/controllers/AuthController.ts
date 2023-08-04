@@ -26,7 +26,7 @@ export default class AuthController {
       const session = await authService.login(data);
       res.cookie(AUTH_SESSION, session, {
         secure: true,
-        httpOnly: process.env.NODE_ENV === 'production',
+        // httpOnly: process.env.NODE_ENV === 'production',
         expires: dayjs().add(1, 'days').toDate(),
         sameSite: 'none',
       });
