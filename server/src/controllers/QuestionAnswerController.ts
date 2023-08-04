@@ -39,29 +39,4 @@ export default class QuestionAnswerController {
       httpErrorHandler(error, res);
     }
   }
-
-  static async getStudentQuizzesResult(req: IRequest, res: Response) {
-    try {
-      const page = Number(req.query.page) || 1;
-      const user = req.user;
-      const data = await questionAnswerService.getStudentQuizzesResult(
-        user?.id,
-        page
-      );
-      res.send(data);
-    } catch (error) {
-      httpErrorHandler(error, res);
-    }
-  }
-
-  static async getQuizResults(req: IRequest, res: Response) {
-    try {
-      const page = Number(req.query.page) || 1;
-      const quizId = Number(req.params.qid);
-      const data = await questionAnswerService.getQuizResults(quizId, page);
-      res.send(data);
-    } catch (error) {
-      httpErrorHandler(error, res);
-    }
-  }
 }

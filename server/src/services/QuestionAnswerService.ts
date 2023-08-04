@@ -65,64 +65,64 @@ export default class QuestionAnswerService {
     };
   }
 
-  async getStudentQuizzesResult(userId: number, page = 1) {
-    const student = await this.studentService.findStudentBy({ userId });
-    const pager = new Pagination(page);
+  // async getStudentQuizzesResult(userId: number, page = 1) {
+  //   const student = await this.studentService.findStudentBy({ userId });
+  //   const pager = new Pagination(page);
 
-    const { rows, count } = await QuestionAnswer.findAndCountAll({
-      group: ['quizId'],
-      attributes: ['id', [DB.fn('sum', DB.col('score')), 'score']],
-      include: [
-        {
-          model: Quiz,
-          attributes: QuizDTO,
-          include: [
-            { model: ClassRoom, attributes: ClassRoomDTO },
-            {
-              model: Lecturer,
-              attributes: LecturerDTO,
-              include: [{ model: User, attributes: UserDTO }],
-            },
-          ],
-        },
-      ],
-      limit: pager.pageSize,
-      offset: pager.startIndex,
-      where: { studentId: student.id },
-    });
+  //   const { rows, count } = await QuestionAnswer.findAndCountAll({
+  //     group: ['quizId'],
+  //     attributes: ['id', [DB.fn('sum', DB.col('score')), 'score']],
+  //     include: [
+  //       {
+  //         model: Quiz,
+  //         attributes: QuizDTO,
+  //         include: [
+  //           { model: ClassRoom, attributes: ClassRoomDTO },
+  //           {
+  //             model: Lecturer,
+  //             attributes: LecturerDTO,
+  //             include: [{ model: User, attributes: UserDTO }],
+  //           },
+  //         ],
+  //       },
+  //     ],
+  //     limit: pager.pageSize,
+  //     offset: pager.startIndex,
+  //     where: { studentId: student.id },
+  //   });
 
-    return {
-      results: rows,
-      page,
-      totalPages: pager.totalPages(count.length),
-    };
-  }
+  //   return {
+  //     results: rows,
+  //     page,
+  //     totalPages: pager.totalPages(count.length),
+  //   };
+  // }
 
-  async getQuizResults(quizId: number, page = 1) {
-    const pager = new Pagination(page);
+  // async getQuizResults(quizId: number, page = 1) {
+  //   const pager = new Pagination(page);
 
-    const { rows, count } = await QuestionAnswer.findAndCountAll({
-      group: ['studentId'],
-      attributes: ['id', [DB.fn('sum', DB.col('score')), 'score']],
-      include: [
-        {
-          model: Student,
-          attributes: StudentDTO,
-          include: [
-            { model: User, attributes: UserDTO },
-            { model: Department, attributes: DepartmentDTO },
-          ],
-        },
-      ],
-      limit: pager.pageSize,
-      offset: pager.startIndex,
-      where: { quizId },
-    });
+  //   const { rows, count } = await QuestionAnswer.findAndCountAll({
+  //     group: ['studentId'],
+  //     attributes: ['id', [DB.fn('sum', DB.col('score')), 'score']],
+  //     include: [
+  //       {
+  //         model: Student,
+  //         attributes: StudentDTO,
+  //         include: [
+  //           { model: User, attributes: UserDTO },
+  //           { model: Department, attributes: DepartmentDTO },
+  //         ],
+  //       },
+  //     ],
+  //     limit: pager.pageSize,
+  //     offset: pager.startIndex,
+  //     where: { quizId },
+  //   });
 
-    return {
-      results: rows,
-      page,
-      totalPages: pager.totalPages(count.length),
-    };
-  }
+  //   return {
+  //     results: rows,
+  //     page,
+  //     totalPages: pager.totalPages(count.length),
+  //   };
+  // }
 }

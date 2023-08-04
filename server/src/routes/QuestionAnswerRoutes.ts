@@ -10,17 +10,6 @@ QuestionAnswerRoutes.post(
 );
 
 QuestionAnswerRoutes.get(
-  '/quizzes/:qid/results',
-  QuestionAnswerController.getQuizResults
-);
-
-QuestionAnswerRoutes.get(
-  '/student/quizzes/results',
-  ensureAuth,
-  QuestionAnswerController.getStudentQuizzesResult
-);
-
-QuestionAnswerRoutes.get(
   '/quizzes/:qid/students/:sid/results',
   ensureAuth,
   QuestionAnswerController.getStudentQuizResult

@@ -1,2 +1,2 @@
-const ClassRoomDTO = ['id', 'title', 'updatedAt'];
+const ClassRoomDTO = ['id', 'title', 'status', 'updatedAt'];
 export default ClassRoomDTO;

@@ -7,8 +7,12 @@ import {
   QuizUpdateSchema,
 } from '../validators/schemas/QuizSchema';
 import IRequest from '../models/interfaces/IRequest';
+import QuizResultService from '../services/QuizResultService';
+import Student from '../models/Student';
 
 const quizService = new QuizService();
+const quizResultService = new QuizResultService();
+
 export default class QuizController {
   static async createQuiz(req: IRequest, res: Response) {
     try {
@@ -74,6 +78,56 @@ export default class QuizController {
       await quizService.deleteQuiz(id, cid);
       res.status(204).send({ status: 'OK' });
     } catch (error: any) {
+      httpErrorHandler(error, res);
+    }
+  }
+
+  static async submitQuiz(req: IRequest, res: Response) {
+    try {
+      const quizId = Number(req.params.qid);
+      const user = req.user;
+      const data = await quizResultService.computeQuizResult(quizId, user?.id);
+      res.send(data);
+    } catch (error) {
+      httpErrorHandler(error, res);
+    }
+  }
+
+  static async getStudentQuizResult(req: IRequest, res: Response) {
+    try {
+      const quizId = Number(req.params.qid);
+      const user = await req.user?.reload({ include: [{ model: Student }] });
+      const data = await quizResultService.findBy({
+        quizId,
+        studentId: user?.student.id,
+      });
+      res.send(data);
+    } catch (error) {
+      httpErrorHandler(error, res);
+    }
+  }
+
+  static async getStudentQuizzesResult(req: IRequest, res: Response) {
+    try {
+      const page = Number(req.query.page) || 1;
+      const user = req.user;
+      const data = await quizResultService.getStudentQuizzesResult(
+        user?.id,
+        page
+      );
+      res.send(data);
+    } catch (error) {
+      httpErrorHandler(error, res);
+    }
+  }
+
+  static async getQuizResults(req: IRequest, res: Response) {
+    try {
+      const page = Number(req.query.page) || 1;
+      const quizId = Number(req.params.qid);
+      const data = await quizResultService.getQuizResults(quizId, page);
+      res.send(data);
+    } catch (error) {
       httpErrorHandler(error, res);
     }
   }

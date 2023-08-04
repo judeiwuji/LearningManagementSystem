@@ -86,6 +86,7 @@ export default class ClassRoomService {
     const classRoom = await this.findBy({ id });
     await classRoom.update({
       title: data.title,
+      status: data.status,
     });
     return classRoom.reload();
   }

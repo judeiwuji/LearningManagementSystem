@@ -1,4 +1,4 @@
-import { HasOne, Sequelize } from 'sequelize-typescript';
+import { Sequelize } from 'sequelize-typescript';
 import * as mysql from 'mysql2';
 import * as dotenv from 'dotenv';
 import User from '../User';
@@ -7,7 +7,6 @@ import Level from '../Level';
 import Lecturer from '../Lecturer';
 import Student from '../Student';
 import ClassRoom from '../ClassRoom';
-import ClassRoomEvent from '../ClassRoomEvent';
 import ClassRoomStudent from '../ClassRoomStudent';
 import Lecture from '../Lecture';
 import Quiz from '../Quiz';
@@ -15,6 +14,7 @@ import QuizQuestion from '../QuizQuestion';
 import QuestionOption from '../QuestionOption';
 import QuestionAnswer from '../QuestionAnswer';
 import UserSession from '../UserSession';
+import QuizResult from '../QuizResult';
 dotenv.config();
 
 const DB = new Sequelize({
@@ -38,10 +38,10 @@ const DB = new Sequelize({
     Lecturer,
     Student,
     ClassRoom,
-    ClassRoomEvent,
     ClassRoomStudent,
     Lecture,
     Quiz,
+    QuizResult,
     QuizQuestion,
     QuestionOption,
     QuestionAnswer,

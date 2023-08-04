@@ -8,7 +8,7 @@ import LectureRoutes from './LectureRoutes';
 import QuizRoutes from './QuizRoutes';
 import QuizQuestionRoutes from './QuizQuestionRoutes';
 import QuestionOptionRoutes from './QuestionOptionRoutes';
-import QuestionAnswerRoutes from './QuestionAsnwerRoutes';
+import QuestionAnswerRoutes from './QuestionAnswerRoutes';
 import DepartmentRoutes from './DepartmentRoutes';
 import UserRoutes from './UserRoutes';
 
