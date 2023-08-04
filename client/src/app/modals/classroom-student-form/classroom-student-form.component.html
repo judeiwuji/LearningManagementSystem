@@ -23,12 +23,22 @@
           </div>
         </div>
 
-        <ng-container *ngIf="!student.added">
+        <ng-container>
           <div class="align-self-center">
-            <app-add-btn
-              (onAdd)="addStudent(student)"
-              [loading]="student.processing"
-            ></app-add-btn>
+            <ng-container *ngIf="!student.isStudent">
+              <app-add-btn
+                (onAdd)="addStudent(student)"
+                [loading]="student.processing"
+              ></app-add-btn>
+            </ng-container>
+
+            <ng-container *ngIf="student.isStudent">
+              <app-action-btn
+                [title]="'Remove'"
+                (onAction)="removeStudent(student)"
+                [loading]="student.processing"
+              ></app-action-btn>
+            </ng-container>
           </div>
         </ng-container>
       </div>

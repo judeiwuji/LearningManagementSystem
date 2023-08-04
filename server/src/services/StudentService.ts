@@ -85,7 +85,7 @@ export default class StudentService {
     return student;
   }
 
-  async getStudents(page: number, search?: string) {
+  async getStudents(page: number, search?: string, classRoomId?: number) {
     const pager = new Pagination(page);
     const query: any = {};
     if (search) {
@@ -112,7 +112,17 @@ export default class StudentService {
       limit: pager.pageSize,
       offset: pager.startIndex,
       include: this.studentInclude(query),
-      attributes: StudentDTO,
+      attributes: classRoomId
+        ? [
+            ...StudentDTO,
+            [
+              DB.literal(
+                `(SELECT COUNT(*) FROM ClassRoomStudents Where studentId = Student.id AND classRoomId=${classRoomId} AND (deletedAt IS NULL))`
+              ),
+              'isStudent',
+            ],
+          ]
+        : StudentDTO,
       order: [['user', 'firstname', 'ASC']],
     });
 

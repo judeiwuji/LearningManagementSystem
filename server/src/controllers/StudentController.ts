@@ -31,9 +31,14 @@ export default class StudentController {
 
   static async getStudents(req: Request, res: Response) {
     const page = Number(req.query.page) || 1;
+    const classRoomId = Number(req.query.cid);
     const search = req.query.search as string;
     try {
-      const students = await studentService.getStudents(page, search);
+      const students = await studentService.getStudents(
+        page,
+        search,
+        classRoomId
+      );
       res.send(students);
     } catch (error) {
       httpErrorHandler(error, res);

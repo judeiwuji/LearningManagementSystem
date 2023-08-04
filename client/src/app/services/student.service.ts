@@ -17,9 +17,9 @@ export class StudentService {
     });
   }
 
-  getStudents(page = 1, search = '') {
+  getStudents(page = 1, search = '', classRoomId?: number) {
     return this.http.get<Pagination<Student>>(
-      `${this.API_URL}/students?page=${page}&search=${search}`,
+      `${this.API_URL}/students?page=${page}&search=${search}&cid=${classRoomId}`,
       { withCredentials: true }
     );
   }

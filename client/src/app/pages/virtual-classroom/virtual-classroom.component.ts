@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { map, switchMap } from 'rxjs';
 import { Classroom } from 'src/app/models/ClassRoom';
 import { JitsiMeetOptions } from 'src/app/models/Jitsi';
 import { User } from 'src/app/models/User';
+import { ClassRoomStatus } from 'src/app/models/enums/ClassroomStatus';
 import { AuthService } from 'src/app/services/auth.service';
 import { ClassroomService } from 'src/app/services/classroom.service';
 import { MeetingService } from 'src/app/services/meeting.service';
@@ -30,7 +32,8 @@ export class VirtualClassroomComponent implements OnInit {
     private readonly router: Router,
     private readonly meetingService: MeetingService,
     private readonly authService: AuthService,
-    private readonly classroomService: ClassroomService
+    private readonly classroomService: ClassroomService,
+    private readonly toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -74,11 +77,29 @@ export class VirtualClassroomComponent implements OnInit {
     api.addListener('videoConferenceLeft', (event) => {
       if (this.closeTimeout) return;
 
+      this.updateClassRoomStatus(ClassRoomStatus.CLOSE);
       this.closeTimeout = setTimeout(() => {
         if (this.profile.lecturer)
           this.router.navigate([`/classrooms/${this.classRoom.id}`]);
         else this.router.navigate([`/student/classrooms`]);
       }, 1000);
     });
+
+    api.addListener('videoConferenceJoined', (event) => {
+      this.updateClassRoomStatus(ClassRoomStatus.ACTIVE);
+    });
+  }
+
+  updateClassRoomStatus(status: ClassRoomStatus) {
+    if (this.profile.lecturer) {
+      this.classroomService
+        .updateClassroom({ status }, this.classRoom.id)
+        .subscribe({
+          next: () => {},
+          error: (err) => {
+            this.toastr.warning(err.error.error || err.statusText);
+          },
+        });
+    }
   }
 }

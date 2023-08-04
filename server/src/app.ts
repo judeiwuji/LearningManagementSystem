@@ -40,8 +40,15 @@ class App {
 
   settings() {
     const appService = new AppService();
-    appService.install().catch(() => null);
-    DB.sync({ alter: false });
+    DB.sync({ alter: false }).then(() => {
+      appService.install().catch(() => null);
+    });
+
+    this.app.all('*', (req, res) => {
+      const indexFile = path.join(__dirname, '..', 'public', 'index.html');
+      res.sendFile(indexFile);
+    });
+
     this.app.listen(this.port, () =>
       console.log(`Server is running on PORT ::${this.port}`)
     );

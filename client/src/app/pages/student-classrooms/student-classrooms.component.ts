@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { StudentClassroom } from 'src/app/models/ClassRoom';
 import { Pagination } from 'src/app/models/Pagination';
+import { ClassRoomStatus } from 'src/app/models/enums/ClassroomStatus';
 import { ClassroomService } from 'src/app/services/classroom.service';
 import { StudentService } from 'src/app/services/student.service';
 
@@ -19,10 +21,11 @@ export class StudentClassroomsComponent {
     totalPages: 0,
   };
   searchTerm = '';
+  ClassRoomStatus = ClassRoomStatus;
 
   constructor(
     private readonly toastr: ToastrService,
-    private readonly modal: NgbModal,
+    private readonly router: Router,
     private readonly classroomService: ClassroomService
   ) {}
 
@@ -59,5 +62,9 @@ export class StudentClassroomsComponent {
       totalPages: 0,
     };
     this.loadData();
+  }
+
+  joinClass(item: StudentClassroom) {
+    this.router.navigateByUrl(`/classrooms/${item.classRoom.id}/virtual`);
   }
 }

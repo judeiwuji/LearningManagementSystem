@@ -147,8 +147,8 @@ export default class ClassRoomStudentService {
     };
   }
 
-  async removeStudent(classRoomId: number, id: number) {
-    const classRoomStudent = await this.findBy({ classRoomId, id });
+  async removeStudent(classRoomId: number, studentId: number) {
+    const classRoomStudent = await this.findBy({ classRoomId, studentId });
 
     await classRoomStudent.destroy();
   }

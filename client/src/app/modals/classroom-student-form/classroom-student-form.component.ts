@@ -26,6 +26,7 @@ export class ClassroomStudentFormComponent {
 
   @Input()
   classRoomId!: number;
+  shouldRefresh = false;
 
   students: ClassroomStudent[] = [];
 
@@ -45,7 +46,7 @@ export class ClassroomStudentFormComponent {
 
     this.loading = true;
     const sub = this.studentService
-      .getStudents(page, this.searchTerm)
+      .getStudents(page, this.searchTerm, this.classRoomId)
       .subscribe({
         next: (response) => {
           sub.unsubscribe();
@@ -72,7 +73,7 @@ export class ClassroomStudentFormComponent {
   }
 
   close() {
-    this.activeModal.close(this.students);
+    this.activeModal.close(this.shouldRefresh);
   }
 
   addStudent(data: Student) {
@@ -90,8 +91,29 @@ export class ClassroomStudentFormComponent {
         next: (response) => {
           this.toastr.clear();
           data.processing = false;
-          data.added = true;
-          this.students.push(response);
+          data.isStudent = true;
+          this.shouldRefresh = true;
+        },
+        error: (err) => {
+          data.processing = false;
+          this.toastr.clear();
+          this.toastr.warning(err.error.error || err.statusText);
+        },
+      });
+  }
+
+  removeStudent(data: Student) {
+    if (data.processing) return;
+
+    data.processing = true;
+    const sub = this.classroomStudentService
+      .removeStudent(this.classRoomId, data.id)
+      .subscribe({
+        next: () => {
+          sub.unsubscribe();
+          data.processing = false;
+          data.isStudent = false;
+          this.shouldRefresh = true;
         },
         error: (err) => {
           data.processing = false;

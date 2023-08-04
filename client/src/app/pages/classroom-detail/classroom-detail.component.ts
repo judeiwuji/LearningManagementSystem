@@ -65,13 +65,18 @@ export class ClassroomDetailComponent {
       });
   }
 
-  onSearch(searchTerm: string) {
-    this.searchTerm = searchTerm;
+  reset() {
+    this.searchTerm = '';
     this.pager = {
       page: 1,
       results: [],
       totalPages: 0,
     };
+  }
+  onSearch(searchTerm: string) {
+    this.reset();
+    this.searchTerm = searchTerm;
+
     this.loadData();
   }
 
@@ -83,9 +88,10 @@ export class ClassroomDetailComponent {
 
     instance.componentInstance.classRoomId = this.classRoomId;
 
-    instance.result.then((data: ClassroomStudent[] | null) => {
-      if (data) {
-        this.pager.results.unshift(...data);
+    instance.result.then((shouldRefresh: boolean) => {
+      if (shouldRefresh) {
+        this.reset();
+        this.loadData();
       }
     });
   }
@@ -104,7 +110,7 @@ export class ClassroomDetailComponent {
 
     data.processing = true;
     const sub = this.classroomStudentService
-      .removeStudent(this.classRoomId, data.id)
+      .removeStudent(this.classRoomId, data.studentId)
       .subscribe({
         next: () => {
           sub.unsubscribe();

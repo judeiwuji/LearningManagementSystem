@@ -38,13 +38,15 @@
                     </td>
                     <td class="text-center">
                       <div class="d-flex justify-content-center">
-                        <a
-                          routerLink="/classrooms/{{
-                            item.classRoom.id
-                          }}/virtual"
+                        <button
                           class="btn btn-full btn-sm"
-                          >Join Class</a
+                          [disabled]="
+                            item.classRoom.status === ClassRoomStatus.CLOSE
+                          "
+                          (click)="joinClass(item)"
                         >
+                          Join Class
+                        </button>
                       </div>
                     </td>
                   </tr>
