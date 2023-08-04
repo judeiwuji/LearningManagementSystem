@@ -28,7 +28,11 @@ class App {
     this.app.use(morgan('dev'));
     this.app.use(
       cors({
-        origin: ['http://localhost:5000', 'http://localhost:4200'],
+        origin: [
+          'http://localhost:5000',
+          'http://localhost:4200',
+          'https://electroniclearningsystem.onrender.com',
+        ],
         methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT'],
         credentials: true,
       })
