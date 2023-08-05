@@ -23,7 +23,7 @@ export default class QuizResultService {
   private studentService = new StudentService();
 
   async computeQuizResult(quizId: number, userId: number) {
-    const student = await this.studentService.findStudentBy({});
+    const student = await this.studentService.findStudentBy({userId});
 
     const result = await QuizResult.findOne({
       where: { quizId, studentId: student.id },

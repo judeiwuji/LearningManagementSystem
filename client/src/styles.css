@@ -285,6 +285,10 @@ label:not(.form-check-label) {
 .app-table-container {
   max-width: 100%;
 }
+
+.app-table-container table {
+  min-width: 1000px;
+}
 /* app-table-container */
 
 /* app-rounded */
