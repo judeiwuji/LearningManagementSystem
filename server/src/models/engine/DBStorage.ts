@@ -45,6 +45,7 @@ const DB = new Sequelize({
     QuestionAnswer,
     UserSession,
   ],
+  logging: false,
 });
 
 Quiz.hasOne(ClassRoomStudent, {

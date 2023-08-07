@@ -29,7 +29,7 @@ class App {
     this.app.use(
       cors({
         origin: [
-          'http://localhost:5000',
+          'http://localhost:3000',
           'http://localhost:4200',
           'https://electroniclearningsystem.onrender.com',
         ],
