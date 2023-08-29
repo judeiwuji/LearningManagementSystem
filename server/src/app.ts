@@ -56,20 +56,6 @@ class App {
     this.app.listen(this.port, () =>
       console.log(`Server is running on PORT ::${this.port}`)
     );
-    const payload = {
-      context: {
-        user: {
-          // avatar: 'your_client_avatar_url',
-          name: 'george aguwa',
-          email: 'george@app.com',
-        },
-      },
-      moderator: true,
-      aud: 'jitsi',
-      // "iss": "your_app_id",
-      // "sub": "jitmeet.your_domain.com",
-      room: 'web dev',
-    };
   }
 }
 
