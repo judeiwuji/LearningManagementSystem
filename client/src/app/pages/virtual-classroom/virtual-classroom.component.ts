@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
 import { map, switchMap } from 'rxjs';
 import { Classroom } from 'src/app/models/ClassRoom';
@@ -28,6 +29,7 @@ export class VirtualClassroomComponent implements OnInit {
   closeTimeout: any;
   classRoom!: Classroom;
   authenticated = true;
+  faArrowLeft = faArrowLeft;
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
@@ -94,6 +96,7 @@ export class VirtualClassroomComponent implements OnInit {
         }
       }
     });
+    console.log(api);
   }
 
   updateClassRoomStatus(status: ClassRoomStatus) {
@@ -122,5 +125,14 @@ export class VirtualClassroomComponent implements OnInit {
       this.authenticated = true;
       this.closeTimeout = null;
     }, 1000);
+  }
+
+  leaveClassroom() {
+    if (this.profile.lecturer) {
+      this.updateClassRoomStatus(ClassRoomStatus.CLOSE);
+      this.router.navigate([`/classrooms/${this.classRoom.id}`]);
+    } else {
+      this.router.navigate([`/student/classrooms`]);
+    }
   }
 }
