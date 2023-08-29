@@ -11,9 +11,10 @@ import { ClassroomService } from 'src/app/services/classroom.service';
 import { MeetingService } from 'src/app/services/meeting.service';
 declare class JitsiMeetExternalAPI {
   constructor(domain: string, options: JitsiMeetOptions);
-  executeCommand(command: string, value?: string): void;
+  executeCommand(command: string, ...value: any[]): void;
   addListener(event: string, listener: (data: any) => void): void;
   removeListener(event: string, listener: (data: any) => void): void;
+  getRoomsInfo(): Promise<{ rooms: any[] }>;
 }
 
 @Component({
@@ -26,6 +27,7 @@ export class VirtualClassroomComponent implements OnInit {
   profile!: User;
   closeTimeout: any;
   classRoom!: Classroom;
+  authenticated = true;
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
@@ -70,23 +72,27 @@ export class VirtualClassroomComponent implements OnInit {
       userInfo: {
         displayName: `${this.profile.firstname} ${this.profile.lastname}`,
         email: `${this.profile.email}`,
-        role: this.profile.lecturer ? 'moderator' : 'participant',
+      },
+      configOverwrite: {
+        prejoinPageEnabled: false,
       },
     };
+    if (this.profile.lecturer) {
+      this.updateClassRoomStatus(ClassRoomStatus.ACTIVE);
+    }
     const api = new JitsiMeetExternalAPI(domain, options);
-    api.addListener('videoConferenceLeft', (event) => {
-      if (this.closeTimeout) return;
 
-      this.updateClassRoomStatus(ClassRoomStatus.CLOSE);
-      this.closeTimeout = setTimeout(() => {
-        if (this.profile.lecturer)
-          this.router.navigate([`/classrooms/${this.classRoom.id}`]);
-        else this.router.navigate([`/student/classrooms`]);
-      }, 1000);
+    api.addListener('videoConferenceLeft', (event) => {
+      this.leaveMeeting();
     });
 
-    api.addListener('videoConferenceJoined', (event) => {
-      this.updateClassRoomStatus(ClassRoomStatus.ACTIVE);
+    api.addListener('errorOccurred', (event) => {
+      if (event.error.name === 'conference.connectionError.membersOnly') {
+        this.authenticated = false;
+        if (this.profile.lecturer) {
+          this.updateClassRoomStatus(ClassRoomStatus.CLOSE);
+        }
+      }
     });
   }
 
@@ -101,5 +107,20 @@ export class VirtualClassroomComponent implements OnInit {
           },
         });
     }
+  }
+
+  leaveMeeting() {
+    if (this.closeTimeout) return;
+
+    this.closeTimeout = setTimeout(() => {
+      if (this.authenticated) {
+        this.updateClassRoomStatus(ClassRoomStatus.CLOSE);
+        if (this.profile.lecturer)
+          this.router.navigate([`/classrooms/${this.classRoom.id}`]);
+        else this.router.navigate([`/student/classrooms`]);
+      }
+      this.authenticated = true;
+      this.closeTimeout = null;
+    }, 1000);
   }
 }

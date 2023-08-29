@@ -6,6 +6,9 @@ export interface JitsiMeetOptions {
   userInfo?: {
     email: string;
     displayName: string;
-    role: string;
+    role?: string;
+    moderator?: boolean;
   };
+  configOverwrite: any;
+  jwt?: string;
 }

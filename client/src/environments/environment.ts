@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
-  apiURL: 'http://localhost:5000/api/v1',
+  apiURL: 'http://localhost:3000/api/v1',
   authSession: 'session',
 };
