@@ -34,12 +34,16 @@ QuizRoutes.get(
   QuizController.getStudentQuizzes
 );
 
-QuizRoutes.post('/quizzes/:qid/submit', QuizController.submitQuiz);
+QuizRoutes.post('/quizzes/:qid/submit', ensureAuth, QuizController.submitQuiz);
 QuizRoutes.get(
   '/quizzes/:qid/students/result',
   QuizController.getStudentQuizResult
 );
-QuizRoutes.get('/quizzes/:qid/results', QuizController.getQuizResults);
+QuizRoutes.get(
+  '/quizzes/:qid/results',
+  ensureAuth,
+  QuizController.getQuizResults
+);
 
 QuizRoutes.get(
   '/student/quizzes/results',

@@ -33,8 +33,9 @@ class App {
           'http://localhost:4200',
           'https://electroniclearningsystem.onrender.com',
         ],
-        methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT'],
+        methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'OPTIONS'],
         credentials: true,
+        preflightContinue: true,
       })
     );
     this.app.use(cookieParser(process.env.COOKIE_SECRET));

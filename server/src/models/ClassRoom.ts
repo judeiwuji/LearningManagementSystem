@@ -3,12 +3,15 @@ import {
   Column,
   DataType,
   ForeignKey,
+  HasMany,
   Model,
   Table,
 } from 'sequelize-typescript';
 import Lecturer from './Lecturer';
 import { Optional } from 'sequelize';
 import { ClassRoomStatus } from './enums/ClassRoomStatus';
+import ClassRoomStudent from './ClassRoomStudent';
+import Quiz from './Quiz';
 
 export interface ClassRoomAttributes {
   id: number;
@@ -37,4 +40,10 @@ export default class ClassRoom extends Model<
 
   @Column({ type: DataType.INTEGER, defaultValue: ClassRoomStatus.CLOSE })
   status!: number;
+
+  @HasMany(() => ClassRoomStudent)
+  students!: ClassRoomStudent;
+
+  @HasMany(() => Quiz)
+  quizzes!: Quiz;
 }

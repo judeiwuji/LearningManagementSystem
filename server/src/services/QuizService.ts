@@ -11,6 +11,7 @@ import LecturerDTO from '../models/DTOs/LecturerDTO';
 import { QuizStatus } from '../models/enums/QuizStatus';
 import ClassRoomStudent from '../models/ClassRoomStudent';
 import StudentService from './StudentService';
+import ClassRoom from '../models/ClassRoom';
 
 export default class QuizService {
   private quizInclude() {
@@ -56,9 +57,17 @@ export default class QuizService {
     return quiz;
   }
 
-  async getQuizzes(page: number, search?: string) {
+  async getQuizzes(userId: number, page: number, search?: string) {
     const pager = new Pagination(page);
     const query: any = {};
+
+    try {
+      const lecturer = await this.lecturerService.findLecturerBy({ userId });
+      query.lecturerId = lecturer.id;
+    } catch (error) {
+      // not a lecturer show all quizzes
+    }
+
     if (search) {
       query.title = {
         [Op.like]: `%${search}%`,
@@ -93,23 +102,45 @@ export default class QuizService {
       };
     }
 
-    const { rows, count } = await Quiz.findAndCountAll({
+    // const { rows, count } = await Quiz.findAndCountAll({
+    //   limit: pager.pageSize,
+    //   offset: pager.startIndex,
+    //   include: [
+    //     {
+    //       model: Lecturer,
+    //       attributes: LecturerDTO,
+    //       include: [{ model: User, attributes: UserDTO }],
+    //     },
+    //     {
+    //       model: ClassRoomStudent,
+    //       as: 'classRoomStudent',
+    //       where: { studentId: student.id },
+    //     },
+    //   ],
+    //   where: query,
+    //   attributes: QuizDTO,
+    // });
+
+    const { rows, count } = await ClassRoomStudent.findAndCountAll({
       limit: pager.pageSize,
       offset: pager.startIndex,
       include: [
         {
-          model: Lecturer,
-          attributes: LecturerDTO,
-          include: [{ model: User, attributes: UserDTO }],
-        },
-        {
-          model: ClassRoomStudent,
-          as: 'classRoomStudent',
-          where: { studentId: student.id },
+          model: ClassRoom,
+          include: [
+            {
+              model: Lecturer,
+              attributes: LecturerDTO,
+              include: [{ model: User, attributes: UserDTO }],
+            },
+            {
+              model: Quiz,
+              where: { status: QuizStatus.ACTIVE },
+            },
+          ],
         },
       ],
-      where: query,
-      attributes: QuizDTO,
+      where: { studentId: student.id },
     });
 
     return {

@@ -48,7 +48,7 @@ const DB = new Sequelize({
   logging: false,
 });
 
-Quiz.hasOne(ClassRoomStudent, {
+Quiz.belongsTo(ClassRoomStudent, {
   foreignKey: 'classRoomId',
   as: 'classRoomStudent',
 });

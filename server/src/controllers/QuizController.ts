@@ -36,11 +36,12 @@ export default class QuizController {
     }
   }
 
-  static async getQuizzes(req: Request, res: Response) {
+  static async getQuizzes(req: IRequest, res: Response) {
     const page = Number(req.query.page) || 1;
     const search = req.query.search as string;
+    const user = req.user;
     try {
-      const data = await quizService.getQuizzes(page, search);
+      const data = await quizService.getQuizzes(user?.id, page, search);
       res.send(data);
     } catch (error) {
       httpErrorHandler(error, res);
@@ -86,6 +87,7 @@ export default class QuizController {
     try {
       const quizId = Number(req.params.qid);
       const user = req.user;
+      console.log(user);
       const data = await quizResultService.computeQuizResult(quizId, user?.id);
       res.send(data);
     } catch (error) {
