@@ -1,4 +1,5 @@
 import { Lecturer } from './Lecturer';
+import { Quiz } from './Quiz';
 import { ClassRoomStatus } from './enums/ClassroomStatus';
 
 export interface Classroom {
@@ -9,6 +10,7 @@ export interface Classroom {
   updatedAt: string;
   processing?: boolean;
   status?: ClassRoomStatus;
+  quizzes: Quiz[];
 }
 
 export interface ClassroomActionRequest {

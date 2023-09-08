@@ -4,48 +4,45 @@
   </div>
   <div class="card app-card content-card">
     <div class="card-body">
-      <div class="card-header">
-        <div
-          class="d-flex justify-content-between flex-wrap align-items-center"
-        >
-          <div class="mb-3 mb-sm-0">
-            <app-search-form (onSearch)="onSearch($event)"></app-search-form>
-          </div>
-        </div>
-      </div>
-
       <div class="card-body">
         <div class="app-table-container">
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Quiz</th>
-                <th>Lecturer</th>
-                <th class="text-center">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <ng-container *ngFor="let item of pager.results; index as i">
+          <ng-container *ngFor="let data of pager.results">
+            <h5 class="text-muted text-capitalize">
+              {{ data.classRoom.title }}
+            </h5>
+            <table class="table table-bordered mb-3">
+              <thead>
                 <tr>
-                  <td>{{ i + 1 }}.</td>
-                  <td class="text-capitalize" style="width: 20em">
-                    {{ item.title }}
-                  </td>
-                  <td class="text-capitalize" style="width: 15em">
-                    {{ item.lecturer.user.firstname }}
-                    {{ item.lecturer.user.lastname }}
-                  </td>
-                  <td class="text-center">
-                    <app-action-btn
-                      [title]="'Take Quiz'"
-                      (onAction)="onTakeQuiz(item)"
-                    ></app-action-btn>
-                  </td>
+                  <th>#</th>
+                  <th>Quiz</th>
+                  <th>Lecturer</th>
+                  <th class="text-center">Action</th>
                 </tr>
-              </ng-container>
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                <ng-container
+                  *ngFor="let item of data.classRoom.quizzes; index as i"
+                >
+                  <tr>
+                    <td>{{ i + 1 }}.</td>
+                    <td class="text-capitalize" style="width: 20em">
+                      {{ item.title }}
+                    </td>
+                    <td class="text-capitalize" style="width: 15em">
+                      {{ data.classRoom.lecturer.user.firstname }}
+                      {{ data.classRoom.lecturer.user.lastname }}
+                    </td>
+                    <td class="text-center">
+                      <app-action-btn
+                        [title]="'Take Quiz'"
+                        (onAction)="onTakeQuiz(data.classRoom.id, item.id)"
+                      ></app-action-btn>
+                    </td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </ng-container>
         </div>
 
         <!-- Load more Btn -->

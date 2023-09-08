@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { ClassroomStudent } from 'src/app/models/ClassroomStudent';
 import { Pagination } from 'src/app/models/Pagination';
 import { StudentQuiz } from 'src/app/models/Quiz';
 import { QuizService } from 'src/app/services/quiz.service';
@@ -12,7 +13,7 @@ import { QuizService } from 'src/app/services/quiz.service';
 })
 export class StudentQuizzesComponent {
   loading = false;
-  pager: Pagination<StudentQuiz> = {
+  pager: Pagination<ClassroomStudent> = {
     page: 1,
     results: [],
     totalPages: 0,
@@ -60,8 +61,8 @@ export class StudentQuizzesComponent {
     this.loadData();
   }
 
-  onTakeQuiz(quiz: StudentQuiz) {
+  onTakeQuiz(classRoomId: number, quizId: number) {
     // check if user have taken the quiz
-    this.router.navigateByUrl(`/quiz/intro/${quiz.classRoomId}/${quiz.id}`);
+    this.router.navigateByUrl(`/quiz/intro/${classRoomId}/${quizId}`);
   }
 }

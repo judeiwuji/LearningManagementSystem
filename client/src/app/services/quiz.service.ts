@@ -4,6 +4,7 @@ import { Quiz, QuizActionRequest, StudentQuiz } from '../models/Quiz';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { QuizResult, StudentQuizResult } from '../models/QuizResult';
+import { ClassroomStudent } from '../models/ClassroomStudent';
 
 @Injectable({
   providedIn: 'root',
@@ -40,6 +41,7 @@ export class QuizService {
   submitQuiz(quizId: number) {
     return this.http.post<StudentQuizResult>(
       `${this.API_URL}/quizzes/${quizId}/submit`,
+      {},
       { withCredentials: true }
     );
   }
@@ -72,7 +74,7 @@ export class QuizService {
   }
 
   getStudentQuizzes(page = 1, search = '') {
-    return this.http.get<Pagination<StudentQuiz>>(
+    return this.http.get<Pagination<ClassroomStudent>>(
       `${this.API_URL}/student/quizzes?page=${page}&search=${search}`,
       {
         withCredentials: true,

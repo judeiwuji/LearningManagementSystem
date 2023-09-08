@@ -1,3 +1,4 @@
+import { Classroom } from './ClassRoom';
 import { Student } from './Student';
 
 export interface ClassroomStudent {
@@ -5,6 +6,7 @@ export interface ClassroomStudent {
   classRoomId: number;
   studentId: number;
   student: Student;
+  classRoom: Classroom;
   processing?: boolean;
 }
 
